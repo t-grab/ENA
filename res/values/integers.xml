@@ -1,0 +1,5 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <integer name="max_val">100</integer>
+    <integer name="cur_val">50</integer>
+</resources>

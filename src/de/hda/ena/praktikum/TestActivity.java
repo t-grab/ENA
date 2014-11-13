@@ -6,10 +6,8 @@ import android.app.ActionBar;
 import android.app.Fragment;
 import android.app.FragmentManager;
 import android.content.Context;
-import android.content.Intent;
 import android.os.Build;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.Menu;
@@ -17,12 +15,10 @@ import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.support.v4.widget.DrawerLayout;
-import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
-import android.widget.ListView;
 import android.widget.TextView;
 
-public class MainActivity extends Activity implements
+public class TestActivity extends Activity implements
 		NavigationDrawerFragment.NavigationDrawerCallbacks {
 
 	/**
@@ -30,9 +26,7 @@ public class MainActivity extends Activity implements
 	 * navigation drawer.
 	 */
 	private NavigationDrawerFragment mNavigationDrawerFragment;
-	
-	private MainFragment mMainFragment;
-	
+
 	/**
 	 * Used to store the last screen title. For use in
 	 * {@link #restoreActionBar()}.
@@ -42,13 +36,10 @@ public class MainActivity extends Activity implements
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
-		setContentView(R.layout.activity_main);
+		setContentView(R.layout.activity_test);
 
 		mNavigationDrawerFragment = (NavigationDrawerFragment) getFragmentManager()
 				.findFragmentById(R.id.navigation_drawer);
-		
-		mMainFragment = (MainFragment) getFragmentManager().findFragmentById(R.id.LinearLayout1);
-		
 		mTitle = getTitle();
 
 		// Set up the drawer.
@@ -63,25 +54,19 @@ public class MainActivity extends Activity implements
 		fragmentManager
 				.beginTransaction()
 				.replace(R.id.container,
-						new MainFragment()
-						/*PlaceholderFragment.newInstance(position + 1)
-						 */).commit();
-						 
+						PlaceholderFragment.newInstance(position + 1)).commit();
 	}
 
 	public void onSectionAttached(int number) {
 		switch (number) {
 		case 1:
-			mTitle = getString(R.string.title_drawer_day);
+			mTitle = getString(R.string.title_section1);
 			break;
 		case 2:
-			mTitle = getString(R.string.title_drawer_week);
+			mTitle = getString(R.string.title_section2);
 			break;
 		case 3:
-			mTitle = getString(R.string.title_drawer_month);
-			break;
-		case 4:
-			mTitle = getString(R.string.title_drawer_year);
+			mTitle = getString(R.string.title_section3);
 			break;
 		}
 	}
@@ -99,7 +84,7 @@ public class MainActivity extends Activity implements
 			// Only show items in the action bar relevant to this screen
 			// if the drawer is not showing. Otherwise, let the drawer
 			// decide what to show in the action bar.
-			getMenuInflater().inflate(R.menu.main, menu);
+			getMenuInflater().inflate(R.menu.test, menu);
 			restoreActionBar();
 			return true;
 		}
@@ -127,7 +112,7 @@ public class MainActivity extends Activity implements
 		 * fragment.
 		 */
 		private static final String ARG_SECTION_NUMBER = "section_number";
-		
+
 		/**
 		 * Returns a new instance of this fragment for the given section number.
 		 */
@@ -138,14 +123,14 @@ public class MainActivity extends Activity implements
 			fragment.setArguments(args);
 			return fragment;
 		}
-		
+
 		public PlaceholderFragment() {
 		}
 
 		@Override
 		public View onCreateView(LayoutInflater inflater, ViewGroup container,
 				Bundle savedInstanceState) {
-			View rootView = inflater.inflate(R.layout.fragment_main, container,
+			View rootView = inflater.inflate(R.layout.fragment_test, container,
 					false);
 			return rootView;
 		}
@@ -153,10 +138,8 @@ public class MainActivity extends Activity implements
 		@Override
 		public void onAttach(Activity activity) {
 			super.onAttach(activity);
-			((MainActivity) activity).onSectionAttached(getArguments().getInt(
+			((TestActivity) activity).onSectionAttached(getArguments().getInt(
 					ARG_SECTION_NUMBER));
-			
-			
 		}
 	}
 

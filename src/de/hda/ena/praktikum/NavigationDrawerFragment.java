@@ -95,7 +95,7 @@ public class NavigationDrawerFragment extends Fragment {
 	public View onCreateView(LayoutInflater inflater, ViewGroup container,
 			Bundle savedInstanceState) {
 		mDrawerListView = (ListView) inflater.inflate(
-				R.layout.fragment_navigation_drawer, container, false);
+				R.layout.fragment_navigation_drawer_test, container, false);
 		mDrawerListView
 				.setOnItemClickListener(new AdapterView.OnItemClickListener() {
 					@Override
@@ -108,9 +108,11 @@ public class NavigationDrawerFragment extends Fragment {
 				.getThemedContext(),
 				android.R.layout.simple_list_item_activated_1,
 				android.R.id.text1, new String[] {
-						getString(R.string.title_section1),
-						getString(R.string.title_section2),
-						getString(R.string.title_section3), }));
+						getString(R.string.title_drawer_day),
+						getString(R.string.title_drawer_week),
+						getString(R.string.title_drawer_month),
+						getString(R.string.title_drawer_year)
+						, }));
 		mDrawerListView.setItemChecked(mCurrentSelectedPosition, true);
 		return mDrawerListView;
 	}
