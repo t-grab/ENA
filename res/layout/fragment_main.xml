@@ -29,7 +29,9 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:entries="@array/test"
-        android:textFilterEnabled="true" >
+        android:textFilterEnabled="true" 
+        android:choiceMode="singleChoice"
+        android:listSelector="@drawable/category_selector">
 
     </ListView>
 
