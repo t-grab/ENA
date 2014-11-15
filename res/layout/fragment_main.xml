@@ -16,21 +16,42 @@
         android:layout_height="wrap_content"
         android:text="@string/app_name" />
 
-    <ProgressBar
-        android:id="@+id/progressBar1"
-        style="?android:attr/progressBarStyleHorizontal"
+    <FrameLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:max="@integer/max_val"
-        android:progress="@integer/cur_val" />
+        android:layout_height="wrap_content" >
+
+       
+
+        <ProgressBar
+            android:id="@+id/progressBar1"
+            style="@style/tallerBarStyle"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:max="@integer/max_val"
+            android:maxHeight="48dp"
+            android:minHeight="72dp"
+            android:progress="@integer/cur_val" />
+
+         <TextView
+             android:id="@+id/textView1"
+             android:layout_width="match_parent"
+             android:layout_height="match_parent"
+             android:background="@android:color/transparent"
+             android:gravity="center_vertical|center_horizontal"
+             android:text="Bilanz" 
+             />
+
+    </FrameLayout>
+
+    <!--  -->
 
     <ListView
         android:id="@+id/listView1"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="0dp"
+        android:layout_weight="0.69"
         android:entries="@array/test"
         android:textFilterEnabled="true" >
-
     </ListView>
 
 </LinearLayout>
