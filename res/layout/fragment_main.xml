@@ -52,6 +52,9 @@
         android:layout_weight="0.69"
         android:entries="@array/test"
         android:textFilterEnabled="true" >
+        android:textFilterEnabled="true" 
+        android:choiceMode="singleChoice"
+        android:listSelector="@drawable/category_selector">
     </ListView>
 
 </LinearLayout>
