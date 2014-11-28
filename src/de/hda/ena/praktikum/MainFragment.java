@@ -1,5 +1,8 @@
 package de.hda.ena.praktikum;
 
+import java.util.ArrayList;
+import java.util.Calendar;
+
 import android.app.Fragment;
 import android.content.Intent;
 import android.os.Bundle;
@@ -8,7 +11,9 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
 import android.widget.LinearLayout;
+import android.widget.ListAdapter;
 import android.widget.ListView;
 
 public class MainFragment extends Fragment {
@@ -47,6 +52,13 @@ public class MainFragment extends Fragment {
 			}
 		});
 		}
+		
+		ArrayList<Category> categories = new ArrayList<Category>();
+		categories.add(new Category("Studium"));
+		categories.get(0).getExpenses().add(new Expense(Calendar.getInstance(), 0f, "Test"));
+		
+		mListView.setAdapter(new ArrayAdapter<Category>(this.getActivity(), android.R.layout.simple_list_item_1, categories));
+		
 		return rootView;
 	}
 }
