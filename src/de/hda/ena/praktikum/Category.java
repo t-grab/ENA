@@ -49,12 +49,18 @@ public class Category {
 		Calendar start = Calendar.getInstance();
 		
 		switch(interval) {
-		case TAG:
+		case TAG: {
 			start.set(Calendar.HOUR_OF_DAY, 0);
-		case WOCHE:
+			break;
+		}
+		case WOCHE: {
 			start.set(Calendar.DAY_OF_WEEK, start.getActualMinimum(Calendar.DAY_OF_WEEK));
-		default:
+			break;
+		}
+		default: {
 			start.set(Calendar.DAY_OF_MONTH, 1);
+			break;
+			}
 		}
 		
 		float sum = 0f;
