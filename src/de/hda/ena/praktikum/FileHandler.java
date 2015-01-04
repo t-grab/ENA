@@ -12,16 +12,16 @@ import java.util.Calendar;
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
-
-import android.R.string;
 import android.content.Context;
 import android.widget.Toast;
 
 public class FileHandler {
-	private String path;
+	private final String path;
+	private final Context ct;
 	
-	public FileHandler(String p) {
+	public FileHandler(String p, Context ct) {
 		this.path = p;
+		this.ct  = ct;
 	}
 	
 	public ArrayList<Category> read(Context c) {
@@ -39,6 +39,8 @@ public class FileHandler {
 			while((line = reader.readLine()) != null) {
 				total += line;
 			}
+			reader.close();
+			stream.close();
 			
 			JSONArray jsonArr = new JSONArray(total);
 			for(int i = 0; i < jsonArr.length(); ++i) {
@@ -47,18 +49,20 @@ public class FileHandler {
 				ArrayList<Expense> exp = this.JSONArrayToExpenses((JSONArray)json.get("expenses"));
 				Category cat = new Category(title);
 				cat.setExpenses(exp);
+				
+				cats.add(cat);
 			}
 			
 			
 			return cats;
 		}
 		catch(Exception e) {
-			Toast.makeText(c, "Fehler beim Einlesen!", Toast.LENGTH_SHORT).show();
+			Toast.makeText(c, R.string.error_read, Toast.LENGTH_SHORT).show();
 			return null;
 		}
 	}
 	
-	public void write(Context c, ArrayList<Category> list) {
+	public void write(ArrayList<Category> list) {
 		File dest = new File(this.path);
 		
 		try {
@@ -73,6 +77,8 @@ public class FileHandler {
 				
 				json.put("title", cat.getTitle());
 				json.put("expenses", this.ExpensesToJSON(cat.getExpenses()));
+				
+				jsonArr.put(json);
 			}
 			
 			writer.append(jsonArr.toString());
@@ -80,7 +86,7 @@ public class FileHandler {
 			stream.close();
 		}
 		catch(Exception e) {
-			Toast.makeText(c, "Fehler beim Speichern der Daten!", Toast.LENGTH_SHORT).show();
+			Toast.makeText(ct, R.string.error_write, Toast.LENGTH_SHORT).show();
 		}
 	}
 	
@@ -107,7 +113,8 @@ public class FileHandler {
 		for(int i = 0; i < arr.length(); ++i) {
 			JSONObject json = arr.getJSONObject(i);
 			String description = json.getString("description");
-			float value = Float.valueOf(json.getString("value"));
+			float value = (float)json.getDouble("value");
+			
 			Calendar date = Calendar.getInstance();
 			date.setTimeInMillis(json.getLong("date"));
 			Expense exp = new Expense(date, value, description);

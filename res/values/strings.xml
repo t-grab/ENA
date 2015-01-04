@@ -26,5 +26,8 @@
     <string name="title_section3">Section 3</string>
     <string name="action_example">Example action</string>
     <string name="title_section4">Section 4</string>
+    
+    <string name="error_read">Fehler beim Einlesen!</string>
+    <string name="error_write">Fehler beim Schreiben!</string>
 
 </resources>

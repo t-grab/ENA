@@ -2,7 +2,6 @@ package de.hda.ena.praktikum;
 
 import java.util.ArrayList;
 import java.util.Calendar;
-import java.util.Date;
 
 public class Category {
 	public Category(String t) {
@@ -13,6 +12,28 @@ public class Category {
 	// Getter
 	public String getTitle() { return this.title; }
 	public ArrayList<Expense> getExpenses() { return this.expenses; }
+	public ArrayList<Expense> getExpensesFiltered(Interval interval) {
+		ArrayList<Expense> lExpense = new ArrayList<Expense>();
+		
+		Calendar start = Calendar.getInstance();
+		
+		switch(interval) {
+		case TAG:
+			start.set(Calendar.HOUR_OF_DAY, 0);
+		case WOCHE:
+			start.set(Calendar.DAY_OF_WEEK, start.getActualMinimum(Calendar.DAY_OF_WEEK));
+		default:
+			start.set(Calendar.DAY_OF_MONTH, 1);
+		}
+		
+		for(int i = 0; i < this.expenses.size(); ++i) {
+			Expense ex = this.expenses.get(i);
+			if(ex.getDate().after(start))
+				lExpense.add(ex);
+		}
+		
+		return lExpense;
+	}
 	
 	// Setter
 	public void setTitle(String t) { this.title = t; }
