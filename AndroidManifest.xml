@@ -35,6 +35,9 @@
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="de.hda.ena.praktikum.MainActivity" />
         </activity>
+        <activity android:name="ExpenseActivity" android:parentActivityName=".MainActivity">
+            <meta-data android:name="android.support.PARENT_ACTIVITY" android:value="de.hda.ena.praktikum.MainActivity"/>
+        </activity>
     </application>
 
 </manifest>
