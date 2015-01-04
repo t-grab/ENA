@@ -33,8 +33,6 @@ public class MainActivity extends Activity implements
 	 */
 	private NavigationDrawerFragment mNavigationDrawerFragment;
 	
-	//private MainFragment mMainFragment;
-	
 	private ArrayList<Category> _lData = new ArrayList<Category>();
 	
 	/**
@@ -64,7 +62,7 @@ public class MainActivity extends Activity implements
 	public void onNavigationDrawerItemSelected(int position) {
 		// update the main content by replacing fragments
 		FragmentManager fragmentManager = getFragmentManager();
-		Log.d("notify", "created mainfragment");
+		Log.d("ENA", "created CategoryFragment");
 		
 		fragmentManager
 				.beginTransaction()

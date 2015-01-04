@@ -3,7 +3,7 @@ package de.hda.ena.praktikum;
 import java.util.Calendar;
 
 public class Expense {
-	public Expense(Calendar d, float val, String desc) {
+	public Expense(Calendar d, double val, String desc) {
 		this.date = d; 
 		this.value = val;
 		this.description = desc;
@@ -11,12 +11,12 @@ public class Expense {
 	
 	// Getter
 	public Calendar getDate() { return date; }
-	public float getValue() { return value; }
+	public double getValue() { return value; }
 	public String getDescription() { return description; }
 	
 	// Setter
 	public void setDate(Calendar d) { this.date = d; }
-	public void setValue(float v) { this.value = v; }
+	public void setValue(double v) { this.value = v; }
 	public void setDescription(String desc) { this.description = desc; }
 	
 	// Methods
@@ -27,6 +27,6 @@ public class Expense {
 	
 	// Fields
 	private Calendar date;
-	private float value;
+	private double value;
 	private String description;
 }

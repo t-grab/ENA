@@ -118,7 +118,7 @@ public class FileHandler {
 		for(int i = 0; i < arr.length(); ++i) {
 			JSONObject json = arr.getJSONObject(i);
 			String description = json.getString("description");
-			float value = (float)json.getDouble("value");
+			double value = json.getDouble("value");
 			
 			Calendar date = Calendar.getInstance();
 			date.setTimeInMillis(json.getLong("date"));

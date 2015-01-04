@@ -59,8 +59,9 @@ public class Category {
 		
 		float sum = 0f;
 		for(int i = 0; i < this.expenses.size(); ++i) {
-			if(this.expenses.get(i).getDate().after(start))
+			if(this.expenses.get(i).getDate().after(start)) {
 				sum += this.expenses.get(i).getValue();
+			}
 		}
 		return sum;
 	}
