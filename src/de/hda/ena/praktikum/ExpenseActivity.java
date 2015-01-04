@@ -8,6 +8,7 @@ import android.app.FragmentManager;
 import android.content.Context;
 import android.os.Build;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.Menu;
@@ -36,6 +37,12 @@ public class ExpenseActivity extends Activity implements
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
+		Category c = getIntent().getParcelableExtra("data");
+		if(c != null) {
+			Log.d("ENA", "cat" + c.toString());
+		} else {
+			Log.e("ENA", "No parent Category for Expenses");
+		}
 		setContentView(R.layout.activity_test);
 
 		mNavigationDrawerFragment = (NavigationDrawerFragment) getFragmentManager()
@@ -60,16 +67,16 @@ public class ExpenseActivity extends Activity implements
 	public void onSectionAttached(int number) {
 		switch (number) {
 		case 1:
-			mTitle = getString(R.string.title_section1);
+			mTitle = getString(R.string.title_drawer_day);
 			break;
 		case 2:
-			mTitle = getString(R.string.title_section2);
+			mTitle = getString(R.string.title_drawer_week);
 			break;
 		case 3:
-			mTitle = getString(R.string.title_section3);
+			mTitle = getString(R.string.title_drawer_month);
 			break;
 		case 4:
-			mTitle = getString(R.string.title_section4);
+			mTitle = getString(R.string.title_drawer_year);
 			break;
 		}
 	}

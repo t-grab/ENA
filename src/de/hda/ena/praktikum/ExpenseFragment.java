@@ -8,7 +8,6 @@ import android.app.Fragment;
 import android.content.Intent;
 import android.os.Bundle;
 import android.os.Environment;
-import android.os.Parcelable;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -16,14 +15,14 @@ import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ListView;
 
-public class CategoryFragment extends Fragment {
+public class ExpenseFragment extends Fragment {
 
 	private ListView mListView;
 	private static final String ARG_SECTION_NUMBER = "section_number";
 	private Interval _grouping = Interval.MONAT;
 
-	public static CategoryFragment createInstance(int sectionNumber) {
-		CategoryFragment frg = new CategoryFragment();
+	public static ExpenseFragment createInstance(int sectionNumber) {
+		ExpenseFragment frg = new ExpenseFragment();
 		Bundle args = new Bundle();
 		args.putInt(ARG_SECTION_NUMBER, sectionNumber);
 		frg.setArguments(args);
@@ -54,21 +53,20 @@ public class CategoryFragment extends Fragment {
 
 		mListView = (ListView) rootView.findViewById(R.id.listView1);
 
-		mListView
+		/*mListView
 		.setOnItemLongClickListener(new AdapterView.OnItemLongClickListener() {
 			@Override
 			public boolean onItemLongClick(AdapterView<?> parent,
 					View view, int position, long id) {
 				Intent i = new Intent(view.getContext(),
 						ExpenseActivity.class);
-				Log.i("ENA", "catSelect" + mListView
+				Log.i("catSelect", mListView
 						.getItemAtPosition(position).toString());
 				i.putExtra("selctedCategory", "test");
-				i.putExtra("data", (Parcelable)mListView.getItemAtPosition(position));
 				startActivity(i);
 				return true; // accept click
 			}
-		});
+		});*/
 
 		ArrayList<Category> categories = new ArrayList<Category>();
 		categories.add(new Category("Studium"));
