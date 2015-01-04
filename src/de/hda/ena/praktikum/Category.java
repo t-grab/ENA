@@ -3,6 +3,8 @@ package de.hda.ena.praktikum;
 import java.util.ArrayList;
 import java.util.Calendar;
 
+import android.util.Log;
+
 public class Category {
 	public Category(String t) {
 		this.title = t;
@@ -55,12 +57,14 @@ public class Category {
 		}
 		case WOCHE: {
 			start.set(Calendar.DAY_OF_WEEK, start.getActualMinimum(Calendar.DAY_OF_WEEK));
+			start.set(Calendar.HOUR_OF_DAY, 0);
 			break;
 		}
 		default: {
 			start.set(Calendar.DAY_OF_MONTH, 1);
+			start.set(Calendar.HOUR_OF_DAY, 0);
 			break;
-			}
+		}
 		}
 		
 		float sum = 0f;

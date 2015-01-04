@@ -83,10 +83,10 @@ public class CategoryFragment extends Fragment {
 
 		
 		Calendar datum = Calendar.getInstance();
-		datum.set(2015, 1, 7);
+		datum.set(2015, Calendar.JANUARY, 3);
 		
-		categories.get(2).getExpenses().add(new Expense(datum, 13.0, "Test1"));
-		categories.get(2).getExpenses().add(new Expense(datum, 7.0, "Test2"));
+		categories.get(2).getExpenses().add(new Expense(datum, 13.0, "Debug1"));
+		categories.get(2).getExpenses().add(new Expense(datum, 7.0, "Debug2"));
 
 		FileHandler fh = new FileHandler(Environment
 				.getExternalStorageDirectory().getPath() + "/expenses.json",
