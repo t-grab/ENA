@@ -13,6 +13,7 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 import android.content.Context;
+import android.util.Log;
 import android.widget.Toast;
 
 public class FileHandler {
@@ -57,6 +58,7 @@ public class FileHandler {
 			return cats;
 		}
 		catch(Exception e) {
+			Log.e("ENA", e.getMessage());
 			Toast.makeText(c, R.string.error_read, Toast.LENGTH_SHORT).show();
 			return null;
 		}
@@ -82,10 +84,13 @@ public class FileHandler {
 			}
 			
 			writer.append(jsonArr.toString());
+			writer.flush();
 			writer.close();
+			stream.flush();
 			stream.close();
 		}
 		catch(Exception e) {
+			Log.e("ENA", e.getMessage());
 			Toast.makeText(ct, R.string.error_write, Toast.LENGTH_SHORT).show();
 		}
 	}

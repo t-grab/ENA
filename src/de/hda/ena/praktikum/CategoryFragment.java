@@ -77,7 +77,7 @@ public class CategoryFragment extends Fragment {
 		categories.get(1).getExpenses().add(new Expense(Calendar.getInstance(), 12f, "Test"));
 		categories.get(1).getExpenses().add(new Expense(Calendar.getInstance(), 5f, "Test2"));
 		
-		FileHandler fh = new FileHandler(Environment.getExternalStorageDirectory().getPath() + "exp.json", rootView.getContext());
+		FileHandler fh = new FileHandler(Environment.getExternalStorageDirectory().getPath() + "/expenses.json", rootView.getContext());
 		fh.write(categories);
 		
 		categories = fh.read(rootView.getContext());
