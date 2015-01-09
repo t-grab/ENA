@@ -29,5 +29,12 @@
     
     <string name="error_read">Fehler beim Einlesen!</string>
     <string name="error_write">Fehler beim Schreiben!</string>
+    <string name="expense_name">Ausgabe</string>
+    <string name="expense_value">Betrag</string>
+    <string name="max_money_dialog">Bitte geben Sie den maximal auszugebenden Betrag an:</string>
+    <string name="max_money_button">OK</string>
+    <string name="enter_expense_1">Bitte geben Sie die Art der Ausgabe ein:</string>
+    <string name="enter_expense_2">Bitte geben Sie den Betrag ein:</string>
+    <string name="enter_expense_button">Eintragen</string>
 
 </resources>
