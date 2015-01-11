@@ -6,13 +6,22 @@ import android.os.Parcel;
 import android.os.Parcelable;
 
 public class Expense implements Parcelable {
-	public Expense(Calendar d, double val, String desc) {
+	public Expense(Calendar d, double val, String desc, int i) {
+		this.id = i;
 		this.date = d; 
 		this.value = val;
 		this.description = desc;
 	}
 	
+	public Expense(Calendar d, double val, String desc) {
+		this.id = -1;
+		this.date = d;
+		this.value = val;
+		this.description = desc;
+	}
+	
 	// Getter
+	public int getId() { return id; }
 	public Calendar getDate() { return date; }
 	public double getValue() { return value; }
 	public String getDescription() { return description; }
@@ -29,6 +38,7 @@ public class Expense implements Parcelable {
 	}
 	
 	// Fields
+	private int id;
 	private Calendar date;
 	private double value;
 	private String description;
@@ -39,6 +49,7 @@ public class Expense implements Parcelable {
 		this.date = Calendar.getInstance();
 		this.date.setTimeInMillis(in.readLong());
 	}
+	
 	@Override
 	public int describeContents() {
 		return 0;

@@ -2,6 +2,7 @@ package de.hda.ena.praktikum;
 
 import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.List;
 
 import android.os.Parcel;
 import android.os.Parcelable;
@@ -11,6 +12,7 @@ public class Category implements Parcelable {
 	public Category(String t) {
 		this.title = t;
 		this.expenses = new ArrayList<Expense>();
+		this.maxId = 0;
 	}
 	// Getter
 	public String getTitle() {
@@ -60,6 +62,7 @@ public class Category implements Parcelable {
 
 	public void setExpenses(ArrayList<Expense> exp) {
 		this.expenses = exp;
+		this.maxId = exp.get(exp.size()-1).getId() + 1;
 	}
 
 	// Methods
@@ -98,9 +101,33 @@ public class Category implements Parcelable {
 		return sum;
 	}
 
+	public Expense getExpense(int id) {
+		for(Expense exp : this.expenses)
+			if(exp.getId() == id)
+				return exp;
+		return null;
+	}
+	
+	public void setExpense(Expense exp) {
+		Expense e = getExpense(exp.getId());
+		if(e != null) {
+			e.setDate(exp.getDate());
+			e.setDescription(exp.getDescription());
+			e.setValue(exp.getValue());
+		}
+	}
+	
+	public void addExpense(Expense exp) {
+		if (exp.getId() != -1)
+			return;
+		this.expenses.add(new Expense(exp.getDate(), exp.getValue(), exp.getDescription(), this.maxId));
+		this.maxId++;
+	}
+	
 	// Fields
 	private String title;
 	private ArrayList<Expense> expenses = new ArrayList<Expense>();
+	private int maxId = 0;
 	
 	public Category(Parcel in){
 		this.title= in.readString();
