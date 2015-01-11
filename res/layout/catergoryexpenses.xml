@@ -35,7 +35,9 @@
         android:id="@+id/listView1"
         android:layout_width="match_parent"
         android:layout_height="416dp"
-        android:layout_gravity="bottom" >
+        android:layout_gravity="bottom" 
+        android:choiceMode="singleChoice"
+        android:listSelector="@drawable/category_selector">
 
     </ListView>
 

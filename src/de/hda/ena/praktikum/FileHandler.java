@@ -25,7 +25,7 @@ public class FileHandler {
 		this.ct  = ct;
 	}
 	
-	public ArrayList<Category> read(Context c) {
+	public ArrayList<Category> read() {
 		File src = new File(path);
 		
 		try {
@@ -59,7 +59,7 @@ public class FileHandler {
 		}
 		catch(Exception e) {
 			Log.e("ENA", e.getMessage());
-			Toast.makeText(c, R.string.error_read, Toast.LENGTH_SHORT).show();
+			Toast.makeText(ct, R.string.error_read, Toast.LENGTH_SHORT).show();
 			return null;
 		}
 	}

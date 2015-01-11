@@ -21,10 +21,14 @@ public class ExpenseFragment extends Fragment {
 	private static final String ARG_SECTION_NUMBER = "section_number";
 	private Interval _grouping = Interval.MONAT;
 
-	public static ExpenseFragment createInstance(int sectionNumber) {
+	private Category cCat;
+	
+	public static ExpenseFragment createInstance(int sectionNumber, String cat) {
 		ExpenseFragment frg = new ExpenseFragment();
 		Bundle args = new Bundle();
 		args.putInt(ARG_SECTION_NUMBER, sectionNumber);
+		args.putString("ARG_CATEGORY", cat);
+		
 		frg.setArguments(args);
 		return frg;
 	}
@@ -35,8 +39,22 @@ public class ExpenseFragment extends Fragment {
 		Bundle b = getArguments();
 		if (b != null) {
 			int section = b.getInt(ARG_SECTION_NUMBER);
-			((MainActivity) activity).onSectionAttached(section);
+			((ExpenseActivity) activity).onSectionAttached(section);
 			this._grouping = Interval.values()[section - 1];
+			
+			String cat = b.getString("ARG_CATEGORY");
+			
+			for(Category d : DataStore.cData) {
+				if(d.getTitle().equals(cat)) {
+					cCat = d;
+					break;
+				}
+			}
+			if(cCat == null) {
+				throw new IndexOutOfBoundsException("category");
+			}
+			 
+			
 		}
 	}
 
@@ -48,56 +66,14 @@ public class ExpenseFragment extends Fragment {
 	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container,
 			Bundle savedInstanceState) {
-		View rootView = inflater.inflate(R.layout.fragment_main, container,
+		View rootView = inflater.inflate(R.layout.catergoryexpenses, container,
 				false);
 
 		mListView = (ListView) rootView.findViewById(R.id.listView1);
 
-		/*mListView
-		.setOnItemLongClickListener(new AdapterView.OnItemLongClickListener() {
-			@Override
-			public boolean onItemLongClick(AdapterView<?> parent,
-					View view, int position, long id) {
-				Intent i = new Intent(view.getContext(),
-						ExpenseActivity.class);
-				Log.i("catSelect", mListView
-						.getItemAtPosition(position).toString());
-				i.putExtra("selctedCategory", "test");
-				startActivity(i);
-				return true; // accept click
-			}
-		});*/
-
-		ArrayList<Category> categories = new ArrayList<Category>();
-		categories.add(new Category("Studium"));
-
-		categories.get(0).getExpenses().add(new Expense(Calendar.getInstance(), 7.0, "Test1"));
-		categories.get(0).getExpenses().add(new Expense(Calendar.getInstance(), 5.0, "Test2"));
-
-		categories.add(new Category("Debug"));
-
-		categories.get(1).getExpenses().add(new Expense(Calendar.getInstance(), 12.0, "Test1"));
-		categories.get(1).getExpenses().add(new Expense(Calendar.getInstance(), 5.0, "Test2"));
+		mListView.setAdapter(new ExpenseAdapter(this.getActivity(),
+				this.cCat.getExpensesFiltered(this._grouping)));
 		
-		categories.add(new Category("Debug-PAST"));
-
-		
-		Calendar datum = Calendar.getInstance();
-		datum.set(2015, Calendar.JANUARY, 3);
-		
-		categories.get(2).getExpenses().add(new Expense(datum, 13.0, "Debug1"));
-		categories.get(2).getExpenses().add(new Expense(datum, 7.0, "Debug2"));
-
-		FileHandler fh = new FileHandler(Environment
-				.getExternalStorageDirectory().getPath() + "/expenses.json",
-				rootView.getContext());
-		fh.write(categories);
-
-		categories = fh.read(rootView.getContext());
-		
-		mListView.setAdapter(new CategoryAdapter(this.getActivity(),
-				categories, this._grouping));
-
 		return rootView;
 	}
 }

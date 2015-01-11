@@ -1,5 +1,7 @@
 package de.hda.ena.praktikum;
 
+import java.util.ArrayList;
+
 import android.app.Activity;
 
 import android.app.ActionBar;
@@ -34,15 +36,20 @@ public class ExpenseActivity extends Activity implements
 	 */
 	private CharSequence mTitle;
 
+	ArrayList<Expense> _expenses = new ArrayList<Expense>();
+	private String cat;
+	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
-		Category c = getIntent().getParcelableExtra("data");
+		/*Category c = getIntent().getParcelableExtra("data");
 		if(c != null) {
 			Log.d("ENA", "cat" + c.toString());
 		} else {
 			Log.e("ENA", "No parent Category for Expenses");
-		}
+		}*/	
+		this.cat = getIntent().getStringExtra("ARG_CATEGORY");
+		
 		setContentView(R.layout.activity_test);
 
 		mNavigationDrawerFragment = (NavigationDrawerFragment) getFragmentManager()
@@ -61,7 +68,7 @@ public class ExpenseActivity extends Activity implements
 		fragmentManager
 				.beginTransaction()
 				.replace(R.id.container,
-						PlaceholderFragment.newInstance(position + 1)).commit();
+						ExpenseFragment.createInstance(position + 1, this.cat)).commit();
 	}
 
 	public void onSectionAttached(int number) {
@@ -111,46 +118,6 @@ public class ExpenseActivity extends Activity implements
 			return true;
 		}
 		return super.onOptionsItemSelected(item);
-	}
-
-	/**
-	 * A placeholder fragment containing a simple view.
-	 */
-	public static class PlaceholderFragment extends Fragment {
-		/**
-		 * The fragment argument representing the section number for this
-		 * fragment.
-		 */
-		private static final String ARG_SECTION_NUMBER = "section_number";
-
-		/**
-		 * Returns a new instance of this fragment for the given section number.
-		 */
-		public static PlaceholderFragment newInstance(int sectionNumber) {
-			PlaceholderFragment fragment = new PlaceholderFragment();
-			Bundle args = new Bundle();
-			args.putInt(ARG_SECTION_NUMBER, sectionNumber);
-			fragment.setArguments(args);
-			return fragment;
-		}
-
-		public PlaceholderFragment() {
-		}
-
-		@Override
-		public View onCreateView(LayoutInflater inflater, ViewGroup container,
-				Bundle savedInstanceState) {
-			View rootView = inflater.inflate(R.layout.fragment_test, container,
-					false);
-			return rootView;
-		}
-
-		@Override
-		public void onAttach(Activity activity) {
-			super.onAttach(activity);
-			((ExpenseActivity) activity).onSectionAttached(getArguments().getInt(
-					ARG_SECTION_NUMBER));
-		}
 	}
 
 }

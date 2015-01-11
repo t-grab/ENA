@@ -9,12 +9,9 @@ import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.TextView;
 
-public class ExpenseAdapter extends ArrayAdapter<Expense> {
-	
-	private Interval _grouping = Interval.MONAT;
-	
+public class ExpenseAdapter extends ArrayAdapter<Expense> {	
 	public ExpenseAdapter(Context context,
-			List<Expense> objects, Interval grouping) {
+			List<Expense> objects) {
 		super(context, R.layout.categorylistitem, objects);
 	}
 	
