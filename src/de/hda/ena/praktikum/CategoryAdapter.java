@@ -42,7 +42,7 @@ public class CategoryAdapter extends ArrayAdapter<Category> {
 	    ViewHolder holder = null;
 		
 		if(rowView == null) {
-			LayoutInflater li = (LayoutInflater) this.getContext().getSystemService(this.getContext().LAYOUT_INFLATER_SERVICE);
+			LayoutInflater li = (LayoutInflater) this.getContext().getSystemService(Context.LAYOUT_INFLATER_SERVICE);
 			rowView = li.inflate(R.layout.categorylistitem, parent, false);
 			holder = new ViewHolder();
 			holder.tvName =  (TextView) rowView.findViewById(R.id.category_name);

@@ -37,14 +37,64 @@ public class ExpenseFragment extends Fragment {
 	public void onAttach(Activity activity) {
 		super.onAttach(activity);
 		Bundle b = getArguments();
+		
 		if (b != null) {
 			int section = b.getInt(ARG_SECTION_NUMBER);
 			((ExpenseActivity) activity).onSectionAttached(section);
 			this._grouping = Interval.values()[section - 1];
 			
 			String cat = b.getString("ARG_CATEGORY");
-			if(cat == null) {
+			if(cat != null) {
 				Log.i("ENA", "catAttach: " + cat);
+				for(Category d : DataStore.cData) {
+					if(d.getTitle().equals(cat)) {
+						cCat = d;
+						break;
+					}
+				}
+				if(cCat == null) {
+					throw new IndexOutOfBoundsException("category");
+				}
+			} else {
+				Log.e("ENA", "exFrg:onAtt:sCat");
+			}
+		} else {
+			Log.e("ENA", "exFrg:onAtt:bB");
+		}
+	}
+
+	@Override
+	public void onCreate(Bundle savedInstanceState) {
+		super.onCreate(savedInstanceState);
+		
+		Bundle b = getArguments();
+		
+		if (b != null) {
+			int section = b.getInt(ARG_SECTION_NUMBER);
+			
+			((ExpenseActivity) this.getActivity()).onSectionAttached(section);
+			
+			this._grouping = Interval.values()[section - 1];
+			
+			String cat = b.getString("ARG_CATEGORY");
+			if(cat != null) {
+				Log.i("ENA", "catCreat: " + cat);
+				for(Category d : DataStore.cData) {
+					if(d.getTitle().equals(cat)) {
+						cCat = d;
+						break;
+					}
+				}
+				if(cCat == null) {
+					throw new IndexOutOfBoundsException("category");
+				}
+			} else {
+				Log.e("ENA", "exFrg:onCrea:sCat");
+			}
+		} else if(savedInstanceState != null) {
+			String cat = savedInstanceState.getString("ARG_CATEGORY");
+			if(cat != null) {
+				Log.i("ENA", "catCreat: " + cat);
 				for(Category d : DataStore.cData) {
 					if(d.getTitle().equals(cat)) {
 						cCat = d;
@@ -56,11 +106,9 @@ public class ExpenseFragment extends Fragment {
 				}
 			}
 		}
-	}
-
-	@Override
-	public void onCreate(Bundle savedInstanceState) {
-		super.onCreate(savedInstanceState);
+		
+		
+		
 	}
 
 	@Override
@@ -70,7 +118,15 @@ public class ExpenseFragment extends Fragment {
 				false);
 
 		mListView = (ListView) rootView.findViewById(R.id.listView1);
-
+		
+		if(this.cCat == null) {
+			Log.e("ENA","cCat EMPTY");
+		}
+		
+		if(this._grouping == null) {
+			Log.e("ENA", "grouping empty");
+		}
+		
 		mListView.setAdapter(new ExpenseAdapter(this.getActivity(),
 				this.cCat.getExpensesFiltered(this._grouping)));
 		

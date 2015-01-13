@@ -61,8 +61,6 @@ public class CategoryFragment extends Fragment {
 				
 				i.putExtra("ARG_CATEGORY", ((Category)mListView.getItemAtPosition(position)).getTitle());
 				
-				//i.putExtra("selctedCategory", "test");
-				//i.putExtra("data", (Parcelable)mListView.getItemAtPosition(position));
 				startActivity(i);
 				return true; // accept click
 			}

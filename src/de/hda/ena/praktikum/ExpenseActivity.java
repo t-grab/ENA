@@ -42,15 +42,20 @@ public class ExpenseActivity extends Activity implements
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
-		/*Category c = getIntent().getParcelableExtra("data");
-		if(c != null) {
-			Log.d("ENA", "cat" + c.toString());
-		} else {
-			Log.e("ENA", "No parent Category for Expenses");
-		}*/	
-		this.cat = getIntent().getStringExtra("ARG_CATEGORY");
 		
-		setContentView(R.layout.activity_test);
+		this.cat = getIntent().getStringExtra("ARG_CATEGORY");
+		Log.i("ENA", "catExpense: " + cat);
+		if(savedInstanceState != null) {
+			Log.i("ENA", "SAVED INSTANCE");
+			if(cat == null) {
+				this.cat = savedInstanceState.getString("ARG_CATEGORY");
+				Log.i("ENA", "catExpense: " + cat);
+			}
+		} else {
+			Log.i("ENA", "SAVED INSTANCE EMPTY");
+		}
+		
+		setContentView(R.layout.activity_expense);
 
 		mNavigationDrawerFragment = (NavigationDrawerFragment) getFragmentManager()
 				.findFragmentById(R.id.navigation_drawer);
@@ -65,10 +70,17 @@ public class ExpenseActivity extends Activity implements
 	public void onNavigationDrawerItemSelected(int position) {
 		// update the main content by replacing fragments
 		FragmentManager fragmentManager = getFragmentManager();
+		ExpenseFragment exF = ExpenseFragment.createInstance(position + 1, this.cat);
+		if(exF == null) {
+			Log.e("ENA", "exF empty");
+		}
+		if(this.cat == null) {
+			Log.e("ENA","cat empty");
+		}
 		fragmentManager
 				.beginTransaction()
-				.replace(R.id.container,
-						ExpenseFragment.createInstance(position + 1, this.cat)).commit();
+				.replace(R.id.container_expense,
+						exF).commit();
 	}
 
 	public void onSectionAttached(int number) {
