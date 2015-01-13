@@ -43,18 +43,18 @@ public class ExpenseFragment extends Fragment {
 			this._grouping = Interval.values()[section - 1];
 			
 			String cat = b.getString("ARG_CATEGORY");
-			
-			for(Category d : DataStore.cData) {
-				if(d.getTitle().equals(cat)) {
-					cCat = d;
-					break;
+			if(cat == null) {
+				Log.i("ENA", "catAttach: " + cat);
+				for(Category d : DataStore.cData) {
+					if(d.getTitle().equals(cat)) {
+						cCat = d;
+						break;
+					}
+				}
+				if(cCat == null) {
+					throw new IndexOutOfBoundsException("category");
 				}
 			}
-			if(cCat == null) {
-				throw new IndexOutOfBoundsException("category");
-			}
-			 
-			
 		}
 	}
 
@@ -74,6 +74,19 @@ public class ExpenseFragment extends Fragment {
 		mListView.setAdapter(new ExpenseAdapter(this.getActivity(),
 				this.cCat.getExpensesFiltered(this._grouping)));
 		
+		mListView.setOnItemLongClickListener(new AdapterView.OnItemLongClickListener() {
+			@Override
+			public boolean onItemLongClick(AdapterView<?> parent,
+					View view, int position, long id) {
+				
+				Intent i = new Intent(view.getContext(), EditExpenseActivity.class);
+				
+				Log.i("ENA", "exSelect" + ((Expense)mListView.getItemAtPosition(position)).getDescription());
+				
+				startActivity(i);
+				return true; // accept click
+			}
+		});
 		return rootView;
 	}
 }

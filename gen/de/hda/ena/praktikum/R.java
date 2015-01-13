@@ -9,7 +9,11 @@ package de.hda.ena.praktikum;
 
 public final class R {
     public static final class array {
-        public static final int test=0x7f070000;
+        public static final int pref_example_list_titles=0x7f080001;
+        public static final int pref_example_list_values=0x7f080002;
+        public static final int pref_sync_frequency_titles=0x7f080003;
+        public static final int pref_sync_frequency_values=0x7f080004;
+        public static final int test=0x7f080000;
     }
     public static final class attr {
     }
@@ -21,64 +25,117 @@ public final class R {
          would include 7" and 10" devices in landscape (~960dp and ~1280dp respectively).
     
          */
-        public static final int activity_horizontal_margin=0x7f040000;
-        public static final int activity_vertical_margin=0x7f040001;
+        public static final int activity_horizontal_margin=0x7f050000;
+        public static final int activity_vertical_margin=0x7f050001;
         /** 
          Per the design guidelines, navigation drawers should be between 240dp and 320dp:
          https://developer.android.com/design/patterns/navigation-drawer.html
     
          */
-        public static final int navigation_drawer_width=0x7f040002;
+        public static final int navigation_drawer_width=0x7f050002;
     }
     public static final class drawable {
-        public static final int drawer_shadow=0x7f020000;
-        public static final int ic_drawer=0x7f020001;
-        public static final int ic_launcher=0x7f020002;
+        public static final int category_item=0x7f020000;
+        public static final int category_item_highlighted=0x7f020001;
+        public static final int category_selector=0x7f020002;
+        public static final int drawer_shadow=0x7f020003;
+        public static final int ic_drawer=0x7f020004;
+        public static final int ic_launcher=0x7f020005;
     }
     public static final class id {
-        public static final int LinearLayout1=0x7f0a0003;
-        public static final int action_example=0x7f0a0009;
-        public static final int action_nothing=0x7f0a0008;
-        public static final int action_settings=0x7f0a0007;
-        public static final int container=0x7f0a0001;
-        public static final int drawer_layout=0x7f0a0000;
-        public static final int listView1=0x7f0a0006;
-        public static final int navigation_drawer=0x7f0a0002;
-        public static final int progressBar1=0x7f0a0005;
-        public static final int section_label=0x7f0a0004;
+        public static final int LinearLayout1=0x7f0b000d;
+        public static final int action_example=0x7f0b0012;
+        public static final int action_nothing=0x7f0b0011;
+        public static final int action_settings=0x7f0b0010;
+        public static final int button1=0x7f0b000a;
+        public static final int category_name=0x7f0b0003;
+        public static final int category_value=0x7f0b0004;
+        public static final int container=0x7f0b0000;
+        public static final int drawer_layout=0x7f0b0001;
+        public static final int editText1=0x7f0b0009;
+        public static final int editText2=0x7f0b000c;
+        public static final int expense_name=0x7f0b0005;
+        public static final int expense_value=0x7f0b0006;
+        public static final int listView1=0x7f0b0007;
+        public static final int navigation_drawer=0x7f0b0002;
+        public static final int progressBar1=0x7f0b000f;
+        public static final int section_label=0x7f0b000e;
+        public static final int textView1=0x7f0b0008;
+        public static final int textView2=0x7f0b000b;
     }
     public static final class integer {
-        public static final int cur_val=0x7f050001;
-        public static final int max_val=0x7f050000;
+        public static final int cur_val=0x7f060001;
+        public static final int max_val=0x7f060000;
     }
     public static final class layout {
-        public static final int activity_main=0x7f030000;
-        public static final int activity_test=0x7f030001;
-        public static final int fragment_main=0x7f030002;
-        public static final int fragment_navigation_drawer=0x7f030003;
-        public static final int fragment_navigation_drawer_test=0x7f030004;
-        public static final int fragment_test=0x7f030005;
+        public static final int activity_edit_expense=0x7f030000;
+        public static final int activity_main=0x7f030001;
+        public static final int activity_test=0x7f030002;
+        public static final int categorylistitem=0x7f030003;
+        public static final int catergoryexpenses=0x7f030004;
+        public static final int choosemaxmoney=0x7f030005;
+        public static final int enter_expense=0x7f030006;
+        public static final int fragment_edit_expense=0x7f030007;
+        public static final int fragment_main=0x7f030008;
+        public static final int fragment_navigation_drawer=0x7f030009;
+        public static final int fragment_navigation_drawer_test=0x7f03000a;
+        public static final int fragment_test=0x7f03000b;
     }
     public static final class menu {
-        public static final int global=0x7f090000;
-        public static final int main=0x7f090001;
-        public static final int test=0x7f090002;
+        public static final int edit_expense=0x7f0a0000;
+        public static final int global=0x7f0a0001;
+        public static final int main=0x7f0a0002;
+        public static final int test=0x7f0a0003;
     }
     public static final class string {
-        public static final int action_example=0x7f06000d;
-        public static final int action_nothing=0x7f060007;
-        public static final int action_settings=0x7f060008;
-        public static final int app_name=0x7f060000;
-        public static final int navigation_drawer_close=0x7f060006;
-        public static final int navigation_drawer_open=0x7f060005;
-        public static final int title_activity_test=0x7f060009;
-        public static final int title_drawer_day=0x7f060001;
-        public static final int title_drawer_month=0x7f060003;
-        public static final int title_drawer_week=0x7f060002;
-        public static final int title_drawer_year=0x7f060004;
-        public static final int title_section1=0x7f06000a;
-        public static final int title_section2=0x7f06000b;
-        public static final int title_section3=0x7f06000c;
+        public static final int action_example=0x7f07000d;
+        public static final int action_nothing=0x7f070007;
+        public static final int action_settings=0x7f070008;
+        public static final int app_name=0x7f070000;
+        public static final int enter_expense_1=0x7f070015;
+        public static final int enter_expense_2=0x7f070016;
+        public static final int enter_expense_button=0x7f070017;
+        public static final int error_read=0x7f07000f;
+        public static final int error_write=0x7f070010;
+        public static final int expense_name=0x7f070011;
+        public static final int expense_value=0x7f070012;
+        public static final int hello_world=0x7f070019;
+        public static final int max_money_button=0x7f070014;
+        public static final int max_money_dialog=0x7f070013;
+        public static final int navigation_drawer_close=0x7f070006;
+        public static final int navigation_drawer_open=0x7f070005;
+        public static final int pref_default_display_name=0x7f07001f;
+        public static final int pref_description_social_recommendations=0x7f07001d;
+        /**  Example settings for Data & Sync 
+         */
+        public static final int pref_header_data_sync=0x7f070021;
+        /**  Strings related to Settings 
+ Example General settings 
+         */
+        public static final int pref_header_general=0x7f07001b;
+        /**  Example settings for Notifications 
+         */
+        public static final int pref_header_notifications=0x7f070024;
+        public static final int pref_ringtone_silent=0x7f070027;
+        public static final int pref_title_add_friends_to_messages=0x7f070020;
+        public static final int pref_title_display_name=0x7f07001e;
+        public static final int pref_title_new_message_notifications=0x7f070025;
+        public static final int pref_title_ringtone=0x7f070026;
+        public static final int pref_title_social_recommendations=0x7f07001c;
+        public static final int pref_title_sync_frequency=0x7f070022;
+        public static final int pref_title_system_sync_settings=0x7f070023;
+        public static final int pref_title_vibrate=0x7f070028;
+        public static final int title_activity_edit_expense=0x7f070018;
+        public static final int title_activity_settings=0x7f07001a;
+        public static final int title_activity_test=0x7f070009;
+        public static final int title_drawer_day=0x7f070001;
+        public static final int title_drawer_month=0x7f070003;
+        public static final int title_drawer_week=0x7f070002;
+        public static final int title_drawer_year=0x7f070004;
+        public static final int title_section1=0x7f07000a;
+        public static final int title_section2=0x7f07000b;
+        public static final int title_section3=0x7f07000c;
+        public static final int title_section4=0x7f07000e;
     }
     public static final class style {
         /** 
@@ -102,10 +159,17 @@ public final class R {
     
  API 14 theme customizations can go here. 
          */
-        public static final int AppBaseTheme=0x7f080000;
+        public static final int AppBaseTheme=0x7f090000;
         /**  Application theme. 
  All customizations that are NOT specific to a particular API-level can go here. 
          */
-        public static final int AppTheme=0x7f080001;
+        public static final int AppTheme=0x7f090001;
+        public static final int tallerBarStyle=0x7f090002;
+    }
+    public static final class xml {
+        public static final int pref_data_sync=0x7f040000;
+        public static final int pref_general=0x7f040001;
+        public static final int pref_headers=0x7f040002;
+        public static final int pref_notification=0x7f040003;
     }
 }
