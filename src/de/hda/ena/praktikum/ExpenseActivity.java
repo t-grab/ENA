@@ -8,6 +8,7 @@ import android.app.ActionBar;
 import android.app.Fragment;
 import android.app.FragmentManager;
 import android.content.Context;
+import android.content.Intent;
 import android.os.Build;
 import android.os.Bundle;
 import android.util.Log;
@@ -20,10 +21,10 @@ import android.view.ViewGroup;
 import android.support.v4.widget.DrawerLayout;
 import android.widget.ArrayAdapter;
 import android.widget.TextView;
+import android.widget.Toast;
 
 public class ExpenseActivity extends Activity implements
 		NavigationDrawerFragment.NavigationDrawerCallbacks {
-
 	/**
 	 * Fragment managing the behaviors, interactions and presentation of the
 	 * navigation drawer.
@@ -38,11 +39,11 @@ public class ExpenseActivity extends Activity implements
 
 	ArrayList<Expense> _expenses = new ArrayList<Expense>();
 	private String cat;
-	
+
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
-		
+
 		this.cat = getIntent().getStringExtra("ARG_CATEGORY");
 		Log.i("ENA", "catExpense: " + cat);
 		if(savedInstanceState != null) {
@@ -57,7 +58,7 @@ public class ExpenseActivity extends Activity implements
 		
 		setContentView(R.layout.activity_expense);
 
-		mNavigationDrawerFragment = (NavigationDrawerFragment) getFragmentManager()
+        mNavigationDrawerFragment = (NavigationDrawerFragment) getFragmentManager()
 				.findFragmentById(R.id.navigation_drawer);
 		mTitle = getTitle();
 
@@ -109,6 +110,21 @@ public class ExpenseActivity extends Activity implements
 
 	@Override
 	public boolean onCreateOptionsMenu(Menu menu) {
+        MenuItem btnNewExpense = menu.add("Neu").setOnMenuItemClickListener(
+            new MenuItem.OnMenuItemClickListener() {
+            @Override
+            public boolean onMenuItemClick(MenuItem item) {
+                Intent i = new Intent(getBaseContext(), EditExpenseActivity.class);
+                i.putExtra("Request", RequestCodes.NEW);
+                i.putExtra("CategoryName", cat);
+                startActivityForResult(i, RequestCodes.NEW.ordinal());
+
+                return false;
+            }
+        });
+
+        btnNewExpense.setShowAsAction(MenuItem.SHOW_AS_ACTION_IF_ROOM);
+
 		if (!mNavigationDrawerFragment.isDrawerOpen()) {
 			// Only show items in the action bar relevant to this screen
 			// if the drawer is not showing. Otherwise, let the drawer
@@ -117,8 +133,31 @@ public class ExpenseActivity extends Activity implements
 			restoreActionBar();
 			return true;
 		}
+
 		return super.onCreateOptionsMenu(menu);
 	}
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        switch(RequestCodes.values()[requestCode]) {
+            case NEW:
+                break;
+            case EDIT:
+                break;
+            default:
+                // go crazy. yep, crazy.
+        }
+
+
+        if (requestCode == 1) {
+            if(resultCode == RESULT_OK){
+                Toast.makeText(this, "Positive Result", Toast.LENGTH_LONG);
+            }
+            if (resultCode == RESULT_CANCELED) {
+                //Write your code if there's no result
+            }
+        }
+    }
 
 	@Override
 	public boolean onOptionsItemSelected(MenuItem item) {

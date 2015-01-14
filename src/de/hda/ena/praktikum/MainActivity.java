@@ -13,6 +13,7 @@ import android.content.Intent;
 import android.os.Build;
 import android.os.Bundle;
 import android.os.Environment;
+import android.provider.ContactsContract;
 import android.util.Log;
 import android.view.Gravity;
 import android.view.LayoutInflater;
@@ -64,33 +65,12 @@ public class MainActivity extends Activity implements
 			FileHandler fh = new FileHandler(Environment
 					.getExternalStorageDirectory().getPath() + "/expenses.json",
 					getApplicationContext());
-			
-			/*ArrayList<Category> categories = new ArrayList<Category>();
-			categories.add(new Category("Studium"));
 
-			categories.get(0).getExpenses().add(new Expense(Calendar.getInstance(), 7.0, "Test1"));
-			categories.get(0).getExpenses().add(new Expense(Calendar.getInstance(), 5.0, "Test2"));
-
-			categories.add(new Category("Debug"));
-
-			categories.get(1).getExpenses().add(new Expense(Calendar.getInstance(), 12.0, "Test1"));
-			categories.get(1).getExpenses().add(new Expense(Calendar.getInstance(), 5.0, "Test2"));
-			
-			categories.add(new Category("Debug-PAST"));
-
-			
-			Calendar datum = Calendar.getInstance();
-			datum.set(2015, Calendar.JANUARY, 3);
-			
-			categories.get(2).getExpenses().add(new Expense(datum, 13.0, "Debug1"));
-			categories.get(2).getExpenses().add(new Expense(datum, 7.0, "Debug2"));
-			
-			fh.write(categories);*/
-			
 			DataStore.cData = fh.read();
+            if(DataStore.cData == null) {
+                DataStore.initForFirstUse();
+            }
 		}
-		
-	
 	}
 
 	@Override

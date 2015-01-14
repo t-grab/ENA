@@ -10,10 +10,12 @@ import android.os.Bundle;
 import android.os.Environment;
 import android.util.Log;
 import android.view.LayoutInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ListView;
+import android.widget.TextView;
 
 public class ExpenseFragment extends Fragment {
 
@@ -22,7 +24,7 @@ public class ExpenseFragment extends Fragment {
 	private Interval _grouping = Interval.MONAT;
 
 	private Category cCat;
-	
+
 	public static ExpenseFragment createInstance(int sectionNumber, String cat) {
 		ExpenseFragment frg = new ExpenseFragment();
 		Bundle args = new Bundle();
@@ -114,10 +116,13 @@ public class ExpenseFragment extends Fragment {
 	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container,
 			Bundle savedInstanceState) {
-		View rootView = inflater.inflate(R.layout.catergoryexpenses, container,
+		final View rootView = inflater.inflate(R.layout.catergoryexpenses, container,
 				false);
 
-		mListView = (ListView) rootView.findViewById(R.id.listView1);
+        final TextView viewTitle = (TextView) rootView.findViewById(R.id.category_viewTitle);
+        viewTitle.setText(this.cCat.getTitle());
+
+        mListView = (ListView) rootView.findViewById(R.id.listView1);
 		
 		if(this.cCat == null) {
 			Log.e("ENA","cCat EMPTY");
@@ -136,7 +141,7 @@ public class ExpenseFragment extends Fragment {
 					View view, int position, long id) {
 				
 				Intent i = new Intent(view.getContext(), EditExpenseActivity.class);
-				
+
 				Log.i("ENA", "exSelect" + ((Expense)mListView.getItemAtPosition(position)).getDescription());
 				
 				startActivity(i);
