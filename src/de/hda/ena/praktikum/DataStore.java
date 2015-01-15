@@ -2,6 +2,8 @@ package de.hda.ena.praktikum;
 
 import java.util.ArrayList;
 
+import android.os.Environment;
+
 public final class DataStore {
 	public static ArrayList<Category> cData;
 
@@ -15,4 +17,7 @@ public final class DataStore {
         Category diverses = new Category("Diverses");
         DataStore.cData.add(diverses);
     }
+    
+    public static String sPath = Environment
+			.getExternalStorageDirectory().getPath() + "/expenses.json";
 }

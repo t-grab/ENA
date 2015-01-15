@@ -142,7 +142,7 @@ public class ExpenseFragment extends Fragment {
 				Log.i("ENA", "exSelect" + ((Expense)mListView.getItemAtPosition(position)).getDescription());
 
 				Intent i = new Intent(view.getContext(), EditExpenseActivity.class);
-	            i.putExtra("ARG_REQUEST", RequestCodes.NEW);
+	            i.putExtra("ARG_REQUEST", RequestCodes.EDIT);
 	            i.putExtra("ARG_CATEGORY", cCat.getTitle());
 	            i.putExtra("ARG_ID", ((Expense)mListView.getItemAtPosition(position)).getId());
 	            startActivityForResult(i, RequestCodes.EDIT.ordinal());
@@ -150,5 +150,11 @@ public class ExpenseFragment extends Fragment {
 			}
 		});
 		return rootView;
+	}
+	
+	@Override
+	public void onActivityResult(int requestCode, int resultCode, Intent data) {
+		ExpenseActivity parent = (ExpenseActivity) getActivity();
+		parent.onActivityResult(requestCode, resultCode, data);
 	}
 }

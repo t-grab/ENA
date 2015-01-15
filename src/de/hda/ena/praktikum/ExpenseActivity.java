@@ -39,7 +39,8 @@ public class ExpenseActivity extends Activity implements
 
 	ArrayList<Expense> _expenses = new ArrayList<Expense>();
 	private String cat;
-
+	private int pos;
+	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
@@ -70,6 +71,7 @@ public class ExpenseActivity extends Activity implements
 	@Override
 	public void onNavigationDrawerItemSelected(int position) {
 		// update the main content by replacing fragments
+		pos = position;
 		FragmentManager fragmentManager = getFragmentManager();
 		ExpenseFragment exF = ExpenseFragment.createInstance(position + 1, this.cat);
 		if(exF == null) {
@@ -139,24 +141,25 @@ public class ExpenseActivity extends Activity implements
 
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
-        switch(RequestCodes.values()[requestCode]) {
+        Log.i("ENA", "called Activity Result");
+    	switch(RequestCodes.values()[requestCode]) {
             case NEW:
-                break;
             case EDIT:
-                break;
+            	 if(resultCode == RESULT_OK){
+                     Toast.makeText(this, "Positive Result", Toast.LENGTH_LONG);
+                     FragmentManager fragmentManager = getFragmentManager();
+             		ExpenseFragment exF = ExpenseFragment.createInstance(pos + 1, this.cat);
+             		fragmentManager
+             				.beginTransaction()
+             				.replace(R.id.container_expense,
+             						exF).commit();
+             		FileHandler f = new FileHandler(DataStore.sPath,this);
+             		f.write(DataStore.cData); //save changes
+                 }
+            	break;
             default:
                 // go crazy. yep, crazy.
-        }
-
-
-        if (requestCode == 1) {
-            if(resultCode == RESULT_OK){
-                Toast.makeText(this, "Positive Result", Toast.LENGTH_LONG);
-            }
-            if (resultCode == RESULT_CANCELED) {
-                //Write your code if there's no result
-            }
-        }
+    	}
     }
 
 	@Override

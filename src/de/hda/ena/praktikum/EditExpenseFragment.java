@@ -1,6 +1,7 @@
 package de.hda.ena.praktikum;
 
 import android.app.Fragment;
+import android.content.Intent;
 import android.os.Bundle;
 import android.provider.ContactsContract;
 import android.view.LayoutInflater;
@@ -41,6 +42,10 @@ public class EditExpenseFragment extends Fragment {
                 mCategory = DataStore.cData.get(i);
                 if(mRequest == RequestCodes.EDIT) {
                 	eEdit = mCategory.getExpense((int)params.get("ARG_ID"));
+                	 EditText txtDesc = (EditText) rootView.findViewById(R.id.txtDescription);
+                     EditText txtVal = (EditText) rootView.findViewById(R.id.txtValue);
+                	txtDesc.setText(eEdit.getDescription());
+                	txtVal.setText(String.valueOf(eEdit.getValue()));
                 }
                 break;
             }
@@ -74,7 +79,9 @@ public class EditExpenseFragment extends Fragment {
                 }
                 
                 EditExpenseActivity parent = (EditExpenseActivity) getActivity();
-                parent.finishActivity(mRequest.ordinal());
+                //parent.finishActivity(mRequest.ordinal());
+                Intent returnIntent = new Intent();
+                parent.setResult(android.app.Activity.RESULT_OK, returnIntent);
                 parent.finish();
             }
         });
