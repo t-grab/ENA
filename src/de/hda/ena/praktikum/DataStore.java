@@ -19,6 +19,14 @@ public final class DataStore {
         DataStore.cData.add(diverses);
     }
     
+    public static double sumExpense(Interval i) {
+    	double dSum = 0.0;
+    	for(Category c : DataStore.cData) {
+    		dSum += c.sum(i);
+    	}
+    	return dSum;
+    }
+    
     public static String sPath = Environment
 			.getExternalStorageDirectory().getPath() + "/expenses.json";
     

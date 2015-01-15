@@ -66,13 +66,13 @@ public class EditExpenseFragment extends Fragment {
 						.findViewById(R.id.txtDescription);
 				EditText txtVal = (EditText) rootView
 						.findViewById(R.id.txtValue);
-				double val;
+				
 				
 				if(txtDesc.getText().toString().trim().equals("")) {
 					Toast.makeText(rootView.getContext(), "Please enter a description", Toast.LENGTH_SHORT);
 					return;
 				}
-				
+				double val;
 				try {
 					val = Double.parseDouble(txtVal.getText().toString());
 				}catch(NumberFormatException ex) {

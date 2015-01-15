@@ -28,42 +28,46 @@ public class SettingsActivity extends Activity {
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.choosemaxmoney);
-		Button btnConfirm = (Button)findViewById(R.id.button1);
-		
+		Button btnConfirm = (Button) findViewById(R.id.button1);
+
 		final SettingsActivity me = this;
-		
+
+		EditText txtE = (EditText) findViewById(R.id.editText1);
+		txtE.setText(String.valueOf(DataStore.dMaxExpense));
+
 		btnConfirm.setOnClickListener(new OnClickListener() {
 			@Override
 			public void onClick(View view) {
-				EditText txtE = (EditText)findViewById(R.id.editText1);
-				
+				EditText txtE = (EditText) findViewById(R.id.editText1);
+
 				double val;
 				try {
 					val = Double.parseDouble(txtE.getText().toString());
-				}catch(NumberFormatException ex) {
-					Toast.makeText(me, "Please enter an amount", Toast.LENGTH_SHORT);
+				} catch (NumberFormatException ex) {
+					Toast.makeText(me, "Please enter an amount",
+							Toast.LENGTH_SHORT);
 					return;
 				}
-				
+
 				File dest = new File(DataStore.sSettingsPath);
-					try {
-						dest.createNewFile();
-						FileOutputStream stream = new FileOutputStream(dest);
-						OutputStreamWriter writer = new OutputStreamWriter(stream);
-						
-						JSONObject json = new JSONObject();
-						
-						json.put("dMaxExpense", val);
-						
-						writer.append(json.toString());
-						writer.flush();
-						writer.close();
-						stream.flush();
-						stream.close();
-					} catch (Exception ex) {
-						Log.e("ENA", ex.getMessage());
-					}
-				
+				try {
+					dest.createNewFile();
+					FileOutputStream stream = new FileOutputStream(dest);
+					OutputStreamWriter writer = new OutputStreamWriter(stream);
+
+					JSONObject json = new JSONObject();
+
+					json.put("dMaxExpense", val);
+
+					writer.append(json.toString());
+					writer.flush();
+					writer.close();
+					stream.flush();
+					stream.close();
+				} catch (Exception ex) {
+					Log.e("ENA", ex.getMessage());
+				}
+
 				finish();
 			}
 		});
@@ -72,7 +76,7 @@ public class SettingsActivity extends Activity {
 	@Override
 	public boolean onCreateOptionsMenu(Menu menu) {
 		// Inflate the menu; this adds items to the action bar if it is present.
-		//getMenuInflater().inflate(R.menu.settings, menu);
+		// getMenuInflater().inflate(R.menu.settings, menu);
 		return true;
 	}
 

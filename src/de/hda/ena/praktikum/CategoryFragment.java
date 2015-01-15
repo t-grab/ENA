@@ -9,7 +9,10 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
+import android.widget.EditText;
 import android.widget.ListView;
+import android.widget.ProgressBar;
+import android.widget.TextView;
 
 public class CategoryFragment extends Fragment {
 
@@ -20,7 +23,9 @@ public class CategoryFragment extends Fragment {
 	public static CategoryFragment createInstance(int sectionNumber) {
 		CategoryFragment frg = new CategoryFragment();
 		Bundle args = new Bundle();
+		
 		args.putInt(ARG_SECTION_NUMBER, sectionNumber);
+		
 		frg.setArguments(args);
 		return frg;
 	}
@@ -48,6 +53,18 @@ public class CategoryFragment extends Fragment {
 		View rootView = inflater.inflate(R.layout.fragment_main, container,
 				false);
 
+		ProgressBar pb = (ProgressBar) rootView.findViewById(R.id.progressBar1);
+		
+		double dExpense = DataStore.sumExpense(Interval.MONAT);
+		double dMax = Math.max(DataStore.dMaxExpense, dExpense);
+		int dProt = (int)Math.round(dExpense / dMax * 100.0);
+		
+		pb.setMax((int) Math.floor(dMax));
+		pb.setProgress((int) Math.floor(dExpense));
+		
+		TextView txtB = (TextView) rootView.findViewById(R.id.textView1);
+		txtB.setText( String.valueOf(dProt) +"%");
+		
 		mListView = (ListView) rootView.findViewById(R.id.listView1);
 
 		mListView.setOnItemLongClickListener(new AdapterView.OnItemLongClickListener() {
