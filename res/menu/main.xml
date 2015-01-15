@@ -3,10 +3,6 @@
     tools:context="de.hda.ena.praktikum.MainActivity" >
 
     <item
-        android:id="@+id/action_nothing"
-        android:showAsAction="withText|ifRoom"
-        android:title="@string/action_nothing" android:enabled="false"/>
-    <item
         android:id="@+id/action_settings"
         android:orderInCategory="100"
         android:showAsAction="never"

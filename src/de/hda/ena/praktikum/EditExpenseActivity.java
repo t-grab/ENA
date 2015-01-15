@@ -52,6 +52,14 @@ public class EditExpenseActivity extends Activity {
 		if (id == R.id.action_settings) {
 			return true;
 		}
+
+        	if (id == android.R.id.home) {
+                    Intent returnIntent = new Intent();
+           	    setResult(Activity.RESULT_CANCELED, returnIntent);
+            	    finish();
+        	    return true;
+	        }
+
 		return super.onOptionsItemSelected(item);
 	}
 

@@ -162,6 +162,13 @@ public class ExpenseActivity extends Activity implements
              						exF).commit();
              		FileHandler f = new FileHandler(DataStore.sPath,this);
              		f.write(DataStore.cData); //save changes
+                 } else {
+                     FragmentManager fragmentManager = getFragmentManager();
+                     ExpenseFragment exF = ExpenseFragment.createInstance(pos + 1, this.cat);
+                     fragmentManager
+                             .beginTransaction()
+                             .replace(R.id.container_expense,
+                                     exF).commit();
                  }
             	break;
             default:
