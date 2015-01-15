@@ -107,6 +107,16 @@ public class MainActivity extends Activity implements
 	}
 
 	@Override
+    public void onResume() {
+        FragmentManager fragmentManager = getFragmentManager();
+        fragmentManager
+                .beginTransaction()
+                .replace(R.id.container,
+                        CategoryFragment.createInstance(mPos + 1)).commit();
+        super.onResume();
+    }
+	
+	@Override
 	public void onNavigationDrawerItemSelected(int position) {
 		// update the main content by replacing fragments
 		FragmentManager fragmentManager = getFragmentManager();
