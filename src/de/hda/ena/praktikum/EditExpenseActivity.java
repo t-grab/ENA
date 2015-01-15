@@ -28,6 +28,13 @@ public class EditExpenseActivity extends Activity {
 					.add(R.id.container, new EditExpenseFragment()).commit();
 		}
 	}
+	
+	@Override
+	public boolean onPrepareOptionsMenu(Menu menu) {
+	    MenuItem item= menu.findItem(R.id.action_settings);
+	    item.setVisible(false);
+	    return super.onPrepareOptionsMenu(menu);
+	}
 
 	@Override
 	public boolean onCreateOptionsMenu(Menu menu) {

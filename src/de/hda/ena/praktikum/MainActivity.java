@@ -1,7 +1,14 @@
 package de.hda.ena.praktikum;
 
+import java.io.BufferedReader;
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.InputStreamReader;
 import java.util.ArrayList;
 import java.util.Calendar;
+
+import org.json.JSONArray;
+import org.json.JSONObject;
 
 import android.app.Activity;
 
@@ -35,9 +42,9 @@ public class MainActivity extends Activity implements
 	 * navigation drawer.
 	 */
 	private NavigationDrawerFragment mNavigationDrawerFragment;
-	
+
 	private ArrayList<Category> _lData = new ArrayList<Category>();
-	
+
 	/**
 	 * Used to store the last screen title. For use in
 	 * {@link #restoreActionBar()}.
@@ -51,24 +58,51 @@ public class MainActivity extends Activity implements
 
 		mNavigationDrawerFragment = (NavigationDrawerFragment) getFragmentManager()
 				.findFragmentById(R.id.navigation_drawer);
-		
-		//mMainFragment = (MainFragment) getFragmentManager().findFragmentById(R.id.LinearLayout1);
-		
+
+		// mMainFragment = (MainFragment)
+		// getFragmentManager().findFragmentById(R.id.LinearLayout1);
+
 		mTitle = getTitle();
 
 		// Set up the drawer.
 		mNavigationDrawerFragment.setUp(R.id.navigation_drawer,
 				(DrawerLayout) findViewById(R.id.drawer_layout));
-		
-		//load data
-		if(DataStore.cData == null) {
+
+		// load data
+		if (DataStore.dMaxExpense < 0) {
+			File src = new File(DataStore.sSettingsPath);
+			if (src.exists()) {
+				try {
+					FileInputStream stream = new FileInputStream(src);
+					BufferedReader reader = new BufferedReader(
+							new InputStreamReader(stream));
+
+					String total = "";
+					String line = "";
+					while ((line = reader.readLine()) != null) {
+						total += line;
+					}
+					reader.close();
+					stream.close();
+
+					JSONObject json = new JSONObject(total);
+					DataStore.dMaxExpense = json.getDouble("dMaxExpense");
+				} catch (Exception ex) {
+					Log.e("ENA", ex.getMessage());
+				}
+			} else {
+				DataStore.dMaxExpense = 100;
+			}
+		}
+
+		if (DataStore.cData == null) {
 			FileHandler fh = new FileHandler(DataStore.sPath,
 					getApplicationContext());
 
 			DataStore.cData = fh.read();
-            if(DataStore.cData == null) {
-                DataStore.initForFirstUse();
-            }
+			if (DataStore.cData == null) {
+				DataStore.initForFirstUse();
+			}
 		}
 	}
 
@@ -77,7 +111,7 @@ public class MainActivity extends Activity implements
 		// update the main content by replacing fragments
 		FragmentManager fragmentManager = getFragmentManager();
 		Log.d("ENA", "created CategoryFragment");
-		
+
 		fragmentManager
 				.beginTransaction()
 				.replace(R.id.container,
@@ -127,9 +161,9 @@ public class MainActivity extends Activity implements
 		// automatically handle clicks on the Home/Up button, so long
 		// as you specify a parent activity in AndroidManifest.xml.
 		int id = item.getItemId();
-		
+
 		if (id == R.id.action_settings) {
-			Log.i("ENA","Settings clicked");
+			Log.i("ENA", "Settings clicked");
 			Intent i = new Intent(this, SettingsActivity.class);
 			startActivity(i);
 			return true;

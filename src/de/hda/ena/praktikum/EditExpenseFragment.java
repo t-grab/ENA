@@ -66,9 +66,20 @@ public class EditExpenseFragment extends Fragment {
 						.findViewById(R.id.txtDescription);
 				EditText txtVal = (EditText) rootView
 						.findViewById(R.id.txtValue);
-
-				double val = Double.parseDouble(txtVal.getText().toString());
-
+				double val;
+				
+				if(txtDesc.getText().toString().trim().equals("")) {
+					Toast.makeText(rootView.getContext(), "Please enter a description", Toast.LENGTH_SHORT);
+					return;
+				}
+				
+				try {
+					val = Double.parseDouble(txtVal.getText().toString());
+				}catch(NumberFormatException ex) {
+					Toast.makeText(rootView.getContext(), "Please enter an amount", Toast.LENGTH_SHORT);
+					return;
+				}
+				
 				if (val < 0) {
 					Toast.makeText(rootView.getContext(),
 							"Invalid Expense Amount", Toast.LENGTH_SHORT);

@@ -6,6 +6,7 @@ import android.os.Environment;
 
 public final class DataStore {
 	public static ArrayList<Category> cData;
+	public static double dMaxExpense = -1;
 
     public static void initForFirstUse() {
         DataStore.cData = new ArrayList<Category>();
@@ -20,4 +21,8 @@ public final class DataStore {
     
     public static String sPath = Environment
 			.getExternalStorageDirectory().getPath() + "/expenses.json";
+    
+    public static String sSettingsPath = Environment
+			.getExternalStorageDirectory().getPath() + "/settings.json";
+    
 }
