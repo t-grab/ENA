@@ -50,7 +50,8 @@ public class MainActivity extends Activity implements
 	 * {@link #restoreActionBar()}.
 	 */
 	private CharSequence mTitle;
-
+	private int mPos;
+	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
@@ -122,6 +123,8 @@ public class MainActivity extends Activity implements
 		FragmentManager fragmentManager = getFragmentManager();
 		Log.d("ENA", "created CategoryFragment");
 
+		mPos = position;
+		
 		fragmentManager
 				.beginTransaction()
 				.replace(R.id.container,
