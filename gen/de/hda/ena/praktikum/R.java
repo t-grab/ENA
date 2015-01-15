@@ -43,26 +43,28 @@ public final class R {
         public static final int ic_launcher=0x7f020005;
     }
     public static final class id {
-        public static final int LinearLayout1=0x7f0b000e;
-        public static final int action_example=0x7f0b0013;
-        public static final int action_nothing=0x7f0b0012;
-        public static final int action_settings=0x7f0b0011;
-        public static final int button1=0x7f0b000b;
+        public static final int LinearLayout1=0x7f0b0011;
+        public static final int action_nothing=0x7f0b0015;
+        public static final int action_settings=0x7f0b0014;
+        public static final int btnCommit=0x7f0b0010;
+        public static final int button1=0x7f0b000c;
         public static final int category_name=0x7f0b0004;
         public static final int category_value=0x7f0b0005;
+        public static final int category_viewTitle=0x7f0b0006;
         public static final int container=0x7f0b0000;
         public static final int container_expense=0x7f0b0002;
         public static final int drawer_layout=0x7f0b0001;
-        public static final int editText1=0x7f0b000a;
-        public static final int editText2=0x7f0b000d;
-        public static final int expense_name=0x7f0b0006;
-        public static final int expense_value=0x7f0b0007;
-        public static final int listView1=0x7f0b0008;
+        public static final int editText1=0x7f0b000b;
+        public static final int expense_name=0x7f0b0007;
+        public static final int expense_value=0x7f0b0008;
+        public static final int listView1=0x7f0b0009;
         public static final int navigation_drawer=0x7f0b0003;
-        public static final int progressBar1=0x7f0b0010;
-        public static final int section_label=0x7f0b000f;
-        public static final int textView1=0x7f0b0009;
-        public static final int textView2=0x7f0b000c;
+        public static final int progressBar1=0x7f0b0013;
+        public static final int section_label=0x7f0b0012;
+        public static final int textView1=0x7f0b000a;
+        public static final int textView2=0x7f0b000e;
+        public static final int txtDescription=0x7f0b000d;
+        public static final int txtValue=0x7f0b000f;
     }
     public static final class integer {
         public static final int cur_val=0x7f060001;

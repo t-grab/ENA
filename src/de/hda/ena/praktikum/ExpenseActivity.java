@@ -115,8 +115,8 @@ public class ExpenseActivity extends Activity implements
             @Override
             public boolean onMenuItemClick(MenuItem item) {
                 Intent i = new Intent(getBaseContext(), EditExpenseActivity.class);
-                i.putExtra("Request", RequestCodes.NEW);
-                i.putExtra("CategoryName", cat);
+                i.putExtra("ARG_REQUEST", RequestCodes.NEW);
+                i.putExtra("ARG_CATEGORY", cat);
                 startActivityForResult(i, RequestCodes.NEW.ordinal());
 
                 return false;

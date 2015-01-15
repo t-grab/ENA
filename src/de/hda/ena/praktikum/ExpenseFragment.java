@@ -139,12 +139,13 @@ public class ExpenseFragment extends Fragment {
 			@Override
 			public boolean onItemLongClick(AdapterView<?> parent,
 					View view, int position, long id) {
-				
-				Intent i = new Intent(view.getContext(), EditExpenseActivity.class);
-
 				Log.i("ENA", "exSelect" + ((Expense)mListView.getItemAtPosition(position)).getDescription());
-				
-				startActivity(i);
+
+				Intent i = new Intent(view.getContext(), EditExpenseActivity.class);
+	            i.putExtra("ARG_REQUEST", RequestCodes.NEW);
+	            i.putExtra("ARG_CATEGORY", cCat.getTitle());
+	            i.putExtra("ARG_ID", ((Expense)mListView.getItemAtPosition(position)).getId());
+	            startActivityForResult(i, RequestCodes.EDIT.ordinal());
 				return true; // accept click
 			}
 		});

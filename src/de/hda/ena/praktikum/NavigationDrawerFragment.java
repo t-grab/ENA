@@ -110,8 +110,8 @@ public class NavigationDrawerFragment extends Fragment {
 				android.R.id.text1, new String[] {
 						getString(R.string.title_drawer_day),
 						getString(R.string.title_drawer_week),
-						getString(R.string.title_drawer_month),
-						getString(R.string.title_drawer_year)
+						getString(R.string.title_drawer_month)//,
+						//getString(R.string.title_drawer_year)
 						, }));
 		mDrawerListView.setItemChecked(mCurrentSelectedPosition, true);
 		return mDrawerListView;

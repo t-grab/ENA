@@ -8,6 +8,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.Toast;
 
 import java.util.Calendar;
 
@@ -19,7 +20,8 @@ public class EditExpenseFragment extends Fragment {
 
     private RequestCodes mRequest;
     private Category mCategory;
-
+    private Expense eEdit;
+    
     public EditExpenseFragment() {
     }
 
@@ -29,13 +31,17 @@ public class EditExpenseFragment extends Fragment {
 
         Bundle params = getActivity().getIntent().getExtras();
 
-        mRequest = (RequestCodes) params.get("Request");
-
-        String catName = (String) params.get("CategoryName");
+        mRequest = (RequestCodes) params.get("ARG_REQUEST");
+        
+        
+        String catName = (String) params.get("ARG_CATEGORY");
         mCategory = null;
         for(int i = 0; i < DataStore.cData.size(); ++i) {
             if (DataStore.cData.get(i).getTitle().equals(catName)) {
                 mCategory = DataStore.cData.get(i);
+                if(mRequest == RequestCodes.EDIT) {
+                	eEdit = mCategory.getExpense((int)params.get("ARG_ID"));
+                }
                 break;
             }
         }
@@ -54,11 +60,22 @@ public class EditExpenseFragment extends Fragment {
                 double val = Double.parseDouble(txtVal.getText().toString());
 
                 if (val < 0) {
-                    // Mache etwas sinnvolles
+                    Toast.makeText(rootView.getContext(), "Invalid Expense Amount", Toast.LENGTH_SHORT);
+                    return;
                 }
 
-                Expense exp = new Expense(Calendar.getInstance(), val, txtDesc.getText().toString());
-                ExpenseActivity parent = (ExpenseActivity) getActivity();
+                if(mRequest == RequestCodes.NEW) {
+                	Expense exp = new Expense(Calendar.getInstance(), val, txtDesc.getText().toString());
+                	mCategory.addExpense(exp);
+                } else if(mRequest == RequestCodes.EDIT) {
+                	eEdit.setDescription(txtDesc.getText().toString());
+                	eEdit.setValue(val);
+                	mCategory.setExpense(eEdit);
+                }
+                
+                EditExpenseActivity parent = (EditExpenseActivity) getActivity();
+                parent.finishActivity(mRequest.ordinal());
+                parent.finish();
             }
         });
 
