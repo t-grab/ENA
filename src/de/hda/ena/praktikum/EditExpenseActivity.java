@@ -3,6 +3,7 @@ package de.hda.ena.praktikum;
 import android.app.Activity;
 import android.app.ActionBar;
 import android.app.Fragment;
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.Menu;
@@ -27,13 +28,21 @@ public class EditExpenseActivity extends Activity {
 			getFragmentManager().beginTransaction()
 					.add(R.id.container, new EditExpenseFragment()).commit();
 		}
+		Bundle params = getIntent().getExtras();
+		
+		RequestCodes mRequest = (RequestCodes) params.get("ARG_REQUEST");
+		if(mRequest == RequestCodes.EDIT) {
+			setTitle("Edit Expense" );
+		} else if(mRequest == RequestCodes.NEW) {
+			setTitle("Add new Expense");
+		}
 	}
-	
+
 	@Override
 	public boolean onPrepareOptionsMenu(Menu menu) {
-	    MenuItem item= menu.findItem(R.id.action_settings);
-	    item.setVisible(false);
-	    return super.onPrepareOptionsMenu(menu);
+		MenuItem item = menu.findItem(R.id.action_settings);
+		item.setVisible(false);
+		return super.onPrepareOptionsMenu(menu);
 	}
 
 	@Override
@@ -53,15 +62,14 @@ public class EditExpenseActivity extends Activity {
 			return true;
 		}
 
-        	if (id == android.R.id.home) {
-                    Intent returnIntent = new Intent();
-           	    setResult(Activity.RESULT_CANCELED, returnIntent);
-            	    finish();
-        	    return true;
-	        }
+		if (id == android.R.id.home) {
+			Intent returnIntent = new Intent();
+			setResult(Activity.RESULT_CANCELED, returnIntent);
+			finish();
+			return true;
+		}
 
 		return super.onOptionsItemSelected(item);
 	}
-
 
 }

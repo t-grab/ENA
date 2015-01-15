@@ -40,7 +40,6 @@ public final class R {
     }
     public static final class id {
         public static final int LinearLayout1=0x7f0a0012;
-        public static final int action_nothing=0x7f0a0016;
         public static final int action_settings=0x7f0a0015;
         public static final int btnCommit=0x7f0a0011;
         public static final int btnDelete=0x7f0a0010;
@@ -56,8 +55,8 @@ public final class R {
         public static final int expense_value=0x7f0a0008;
         public static final int listView1=0x7f0a0009;
         public static final int navigation_drawer=0x7f0a0003;
-        public static final int progressBar1=0x7f0a0014;
-        public static final int section_label=0x7f0a0013;
+        public static final int progressBar1=0x7f0a0013;
+        public static final int section_label=0x7f0a0014;
         public static final int textView1=0x7f0a000a;
         public static final int textView2=0x7f0a000e;
         public static final int txtDescription=0x7f0a000d;
@@ -94,6 +93,8 @@ public final class R {
         public static final int action_nothing=0x7f060007;
         public static final int action_settings=0x7f060008;
         public static final int app_name=0x7f060000;
+        public static final int category_name=0x7f06001c;
+        public static final int category_value=0x7f06001d;
         public static final int enter_expense_1=0x7f060015;
         public static final int enter_expense_2=0x7f060016;
         public static final int enter_expense_button=0x7f060017;

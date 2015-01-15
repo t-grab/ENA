@@ -40,26 +40,26 @@ public class ExpenseActivity extends Activity implements
 	ArrayList<Expense> _expenses = new ArrayList<Expense>();
 	private String cat;
 	private int pos;
-	
+
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 
 		this.cat = getIntent().getStringExtra("ARG_CATEGORY");
 		Log.i("ENA", "catExpense: " + cat);
-		if(savedInstanceState != null) {
+		if (savedInstanceState != null) {
 			Log.i("ENA", "SAVED INSTANCE");
-			if(cat == null) {
+			if (cat == null) {
 				this.cat = savedInstanceState.getString("ARG_CATEGORY");
 				Log.i("ENA", "catExpense: " + cat);
 			}
 		} else {
 			Log.i("ENA", "SAVED INSTANCE EMPTY");
 		}
-		
+
 		setContentView(R.layout.activity_expense);
 
-        mNavigationDrawerFragment = (NavigationDrawerFragment) getFragmentManager()
+		mNavigationDrawerFragment = (NavigationDrawerFragment) getFragmentManager()
 				.findFragmentById(R.id.navigation_drawer);
 		mTitle = getTitle();
 
@@ -67,12 +67,12 @@ public class ExpenseActivity extends Activity implements
 		mNavigationDrawerFragment.setUp(R.id.navigation_drawer,
 				(DrawerLayout) findViewById(R.id.drawer_layout));
 	}
-	
+
 	@Override
 	public boolean onPrepareOptionsMenu(Menu menu) {
-	    MenuItem item= menu.findItem(R.id.action_settings);
-	    item.setVisible(false);
-	    return super.onPrepareOptionsMenu(menu);
+		MenuItem item = menu.findItem(R.id.action_settings);
+		item.setVisible(false);
+		return super.onPrepareOptionsMenu(menu);
 	}
 
 	@Override
@@ -80,17 +80,16 @@ public class ExpenseActivity extends Activity implements
 		// update the main content by replacing fragments
 		pos = position;
 		FragmentManager fragmentManager = getFragmentManager();
-		ExpenseFragment exF = ExpenseFragment.createInstance(position + 1, this.cat);
-		if(exF == null) {
+		ExpenseFragment exF = ExpenseFragment.createInstance(position + 1,
+				this.cat);
+		if (exF == null) {
 			Log.e("ENA", "exF empty");
 		}
-		if(this.cat == null) {
-			Log.e("ENA","cat empty");
+		if (this.cat == null) {
+			Log.e("ENA", "cat empty");
 		}
-		fragmentManager
-				.beginTransaction()
-				.replace(R.id.container_expense,
-						exF).commit();
+		fragmentManager.beginTransaction().replace(R.id.container_expense, exF)
+				.commit();
 	}
 
 	public void onSectionAttached(int number) {
@@ -119,20 +118,21 @@ public class ExpenseActivity extends Activity implements
 
 	@Override
 	public boolean onCreateOptionsMenu(Menu menu) {
-        MenuItem btnNewExpense = menu.add("Neu").setOnMenuItemClickListener(
-            new MenuItem.OnMenuItemClickListener() {
-            @Override
-            public boolean onMenuItemClick(MenuItem item) {
-                Intent i = new Intent(getBaseContext(), EditExpenseActivity.class);
-                i.putExtra("ARG_REQUEST", RequestCodes.NEW);
-                i.putExtra("ARG_CATEGORY", cat);
-                startActivityForResult(i, RequestCodes.NEW.ordinal());
+		MenuItem btnNewExpense = menu.add("Neu").setOnMenuItemClickListener(
+				new MenuItem.OnMenuItemClickListener() {
+					@Override
+					public boolean onMenuItemClick(MenuItem item) {
+						Intent i = new Intent(getBaseContext(),
+								EditExpenseActivity.class);
+						i.putExtra("ARG_REQUEST", RequestCodes.NEW);
+						i.putExtra("ARG_CATEGORY", cat);
+						startActivityForResult(i, RequestCodes.NEW.ordinal());
 
-                return false;
-            }
-        });
+						return false;
+					}
+				});
 
-        btnNewExpense.setShowAsAction(MenuItem.SHOW_AS_ACTION_IF_ROOM);
+		btnNewExpense.setShowAsAction(MenuItem.SHOW_AS_ACTION_IF_ROOM);
 
 		if (!mNavigationDrawerFragment.isDrawerOpen()) {
 			// Only show items in the action bar relevant to this screen
@@ -146,35 +146,33 @@ public class ExpenseActivity extends Activity implements
 		return super.onCreateOptionsMenu(menu);
 	}
 
-    @Override
-    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
-        Log.i("ENA", "called Activity Result");
-    	switch(RequestCodes.values()[requestCode]) {
-            case NEW:
-            case EDIT:
-            	 if(resultCode == RESULT_OK){
-                     Toast.makeText(this, "Positive Result", Toast.LENGTH_LONG);
-                     FragmentManager fragmentManager = getFragmentManager();
-             		ExpenseFragment exF = ExpenseFragment.createInstance(pos + 1, this.cat);
-             		fragmentManager
-             				.beginTransaction()
-             				.replace(R.id.container_expense,
-             						exF).commit();
-             		FileHandler f = new FileHandler(DataStore.sPath,this);
-             		f.write(DataStore.cData); //save changes
-                 } else {
-                     FragmentManager fragmentManager = getFragmentManager();
-                     ExpenseFragment exF = ExpenseFragment.createInstance(pos + 1, this.cat);
-                     fragmentManager
-                             .beginTransaction()
-                             .replace(R.id.container_expense,
-                                     exF).commit();
-                 }
-            	break;
-            default:
-                // go crazy. yep, crazy.
-    	}
-    }
+	@Override
+	protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+		Log.i("ENA", "called Activity Result");
+		switch (RequestCodes.values()[requestCode]) {
+		case NEW:
+		case EDIT:
+			if (resultCode == RESULT_OK) {
+				Toast.makeText(this, "Positive Result", Toast.LENGTH_LONG);
+				FragmentManager fragmentManager = getFragmentManager();
+				ExpenseFragment exF = ExpenseFragment.createInstance(pos + 1,
+						this.cat);
+				fragmentManager.beginTransaction()
+						.replace(R.id.container_expense, exF).commit();
+				FileHandler f = new FileHandler(DataStore.sPath, this);
+				f.write(DataStore.cData); // save changes
+			} else {
+				FragmentManager fragmentManager = getFragmentManager();
+				ExpenseFragment exF = ExpenseFragment.createInstance(pos + 1,
+						this.cat);
+				fragmentManager.beginTransaction()
+						.replace(R.id.container_expense, exF).commit();
+			}
+			break;
+		default:
+			// go crazy. yep, crazy.
+		}
+	}
 
 	@Override
 	public boolean onOptionsItemSelected(MenuItem item) {

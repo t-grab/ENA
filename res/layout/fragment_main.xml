@@ -10,16 +10,9 @@
     android:paddingTop="@dimen/activity_vertical_margin"
     tools:context="de.hda.ena.praktikum.MainActivity$PlaceholderFragment" >
 
-    <TextView
-        android:id="@+id/section_label"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="@string/app_name" />
-
     <FrameLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:paddingBottom="20dp" >
+        android:layout_height="wrap_content" >
 
         <ProgressBar
             android:id="@+id/progressBar1"
@@ -31,14 +24,35 @@
             android:minHeight="72dp"
             android:progress="@integer/cur_val" />
 
-         <TextView
-             android:id="@+id/textView1"
-             android:layout_width="match_parent"
-             android:layout_height="match_parent"
-             android:background="@android:color/transparent"
-             android:gravity="center_vertical|center_horizontal"
-             android:text="Bilanz" />
+        <TextView
+            android:id="@+id/textView1"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="@android:color/transparent"
+            android:gravity="center_vertical|center_horizontal"
+            android:text="Bilanz" />
+    </FrameLayout>
 
+    <FrameLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:paddingBottom="20dp" >
+
+        <TextView
+            android:id="@+id/category_name"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="left"
+            android:text="@string/category_name"
+            android:textAppearance="?android:attr/textAppearanceLarge" />
+
+        <TextView
+            android:id="@+id/category_value"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="right"
+            android:text="@string/category_value"
+            android:textAppearance="?android:attr/textAppearanceLarge" />
     </FrameLayout>
 
     <!--  -->
@@ -48,10 +62,10 @@
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:layout_weight="0.69"
-        android:entries="@array/test"
-        android:textFilterEnabled="true"
         android:choiceMode="singleChoice"
-        android:listSelector="@drawable/category_selector" >
+        android:entries="@array/test"
+        android:listSelector="@drawable/category_selector"
+        android:textFilterEnabled="true" >
     </ListView>
 
 </LinearLayout>

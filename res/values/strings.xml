@@ -39,5 +39,7 @@
     <string name="hello_world">Hello world!</string>
     <string name="remove_expense_button">Delete</string>
     <string name="title_settings">Settings</string>
+    <string name="category_name">Kategorie</string>
+    <string name="category_value">Summe</string>
 
 </resources>
