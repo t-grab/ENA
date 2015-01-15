@@ -15,6 +15,16 @@ public final class DataStore {
         DataStore.cData.add(studium);
         Category lebensmittel = new Category("Lebensmittel");
         DataStore.cData.add(lebensmittel);
+        Category kleidung = new Category("Kleidung");
+        DataStore.cData.add(kleidung);
+        Category spiele = new Category("Spiele");
+        DataStore.cData.add(spiele);
+        Category elektronik = new Category("Elektronik");
+        DataStore.cData.add(elektronik);
+        Category kino = new Category("Kino");
+        DataStore.cData.add(kino);
+        Category kraftstoff = new Category("Kraftstoff");
+        DataStore.cData.add(kraftstoff);
         Category diverses = new Category("Diverses");
         DataStore.cData.add(diverses);
     }
