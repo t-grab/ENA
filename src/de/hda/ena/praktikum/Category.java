@@ -35,8 +35,8 @@ public class Category implements Parcelable {
 			break;
 		}
 		case WOCHE: {
-			start.set(Calendar.DAY_OF_WEEK,
-					start.getActualMinimum(Calendar.DAY_OF_WEEK));
+			start.set(Calendar.DAY_OF_WEEK, 
+					start.getFirstDayOfWeek());
 			start.set(Calendar.HOUR_OF_DAY, 0);
 			break;
 		}
@@ -82,8 +82,8 @@ public class Category implements Parcelable {
 			break;
 		}
 		case WOCHE: {
-			start.set(Calendar.DAY_OF_WEEK,
-			start.getActualMinimum(Calendar.DAY_OF_WEEK));
+			start.set(Calendar.DAY_OF_WEEK, 
+					start.getFirstDayOfWeek());
 			start.set(Calendar.HOUR_OF_DAY, 0);
 			break;
 		}

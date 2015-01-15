@@ -8,6 +8,9 @@
         android:id="@+id/textView1"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginLeft="12dp"
+        android:layout_marginRight="12dp"
+        android:layout_marginTop="12dp"
         android:text="@string/enter_expense_1"
         android:textAppearance="?android:attr/textAppearanceLarge" />
 
@@ -15,6 +18,8 @@
         android:id="@+id/txtDescription"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_marginLeft="12dp"
+        android:layout_marginRight="12dp"
         android:layout_marginTop="10dp"
         android:ems="10"
         android:inputType="text" >
@@ -26,6 +31,8 @@
         android:id="@+id/textView2"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginLeft="12dp"
+        android:layout_marginRight="12dp"
         android:layout_marginTop="10dp"
         android:text="@string/enter_expense_2"
         android:textAppearance="?android:attr/textAppearanceLarge" />
@@ -35,24 +42,32 @@
         android:layout_width="92dp"
         android:layout_height="wrap_content"
         android:layout_gravity="right"
+        android:layout_marginRight="12dp"
         android:layout_marginTop="10dp"
         android:ems="10"
         android:inputType="numberDecimal" />
 
-    <Button
-        android:id="@+id/btnDelete"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_gravity="left"
-        android:layout_marginTop="10dp"
-        android:text="@string/remove_expense_button" />
-    
-    <Button
-        android:id="@+id/btnCommit"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_gravity="right"
-        android:layout_marginTop="10dp"
-        android:text="@string/enter_expense_button" />
+    <FrameLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" >
+
+        <Button
+            android:id="@+id/btnDelete"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="12dp"
+            android:layout_marginTop="10dp"
+            android:text="@string/remove_expense_button" />
+
+        <Button
+            android:id="@+id/btnCommit"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="right"
+            android:layout_marginRight="12dp"
+            android:layout_marginTop="10dp"
+            android:text="@string/enter_expense_button" />
+
+    </FrameLayout>
 
 </LinearLayout>
