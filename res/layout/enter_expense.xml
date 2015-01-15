@@ -40,6 +40,14 @@
         android:inputType="numberDecimal" />
 
     <Button
+        android:id="@+id/btnDelete"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="left"
+        android:layout_marginTop="10dp"
+        android:text="@string/remove_expense_button" />
+    
+    <Button
         android:id="@+id/btnCommit"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"

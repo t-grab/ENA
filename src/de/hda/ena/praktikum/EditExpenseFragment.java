@@ -19,74 +19,97 @@ import java.util.Calendar;
 
 public class EditExpenseFragment extends Fragment {
 
-    private RequestCodes mRequest;
-    private Category mCategory;
-    private Expense eEdit;
-    
-    public EditExpenseFragment() {
-    }
+	private RequestCodes mRequest;
+	private Category mCategory;
+	private Expense eEdit;
 
-    @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container, final Bundle savedInstanceState) {
-        final View rootView = inflater.inflate(R.layout.enter_expense, container, false);
+	public EditExpenseFragment() {
+	}
 
-        Bundle params = getActivity().getIntent().getExtras();
+	@Override
+	public View onCreateView(LayoutInflater inflater, ViewGroup container,
+			final Bundle savedInstanceState) {
+		final View rootView = inflater.inflate(R.layout.enter_expense,
+				container, false);
 
-        mRequest = (RequestCodes) params.get("ARG_REQUEST");
-        
-        
-        String catName = (String) params.get("ARG_CATEGORY");
-        mCategory = null;
-        for(int i = 0; i < DataStore.cData.size(); ++i) {
-            if (DataStore.cData.get(i).getTitle().equals(catName)) {
-                mCategory = DataStore.cData.get(i);
-                if(mRequest == RequestCodes.EDIT) {
-                	eEdit = mCategory.getExpense((int)params.get("ARG_ID"));
-                	 EditText txtDesc = (EditText) rootView.findViewById(R.id.txtDescription);
-                     EditText txtVal = (EditText) rootView.findViewById(R.id.txtValue);
-                	txtDesc.setText(eEdit.getDescription());
-                	txtVal.setText(String.valueOf(eEdit.getValue()));
-                }
-                break;
-            }
-        }
+		Bundle params = getActivity().getIntent().getExtras();
 
-        if (mCategory == null) {
-            // Fehler sinnvoll behandeln
-        }
+		mRequest = (RequestCodes) params.get("ARG_REQUEST");
 
-        Button commit = (Button) rootView.findViewById(R.id.btnCommit);
-        commit.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                EditText txtDesc = (EditText) rootView.findViewById(R.id.txtDescription);
-                EditText txtVal = (EditText) rootView.findViewById(R.id.txtValue);
+		String catName = (String) params.get("ARG_CATEGORY");
+		mCategory = null;
+		for (int i = 0; i < DataStore.cData.size(); ++i) {
+			if (DataStore.cData.get(i).getTitle().equals(catName)) {
+				mCategory = DataStore.cData.get(i);
+				if (mRequest == RequestCodes.EDIT) {
+					eEdit = mCategory.getExpense((int) params.get("ARG_ID"));
+					EditText txtDesc = (EditText) rootView
+							.findViewById(R.id.txtDescription);
+					EditText txtVal = (EditText) rootView
+							.findViewById(R.id.txtValue);
+					txtDesc.setText(eEdit.getDescription());
+					txtVal.setText(String.valueOf(eEdit.getValue()));
+				}
+				break;
+			}
+		}
 
-                double val = Double.parseDouble(txtVal.getText().toString());
+		if (mCategory == null) {
+			// Fehler sinnvoll behandeln
+		}
 
-                if (val < 0) {
-                    Toast.makeText(rootView.getContext(), "Invalid Expense Amount", Toast.LENGTH_SHORT);
-                    return;
-                }
+		Button commit = (Button) rootView.findViewById(R.id.btnCommit);
+		commit.setOnClickListener(new View.OnClickListener() {
+			@Override
+			public void onClick(View v) {
+				EditText txtDesc = (EditText) rootView
+						.findViewById(R.id.txtDescription);
+				EditText txtVal = (EditText) rootView
+						.findViewById(R.id.txtValue);
 
-                if(mRequest == RequestCodes.NEW) {
-                	Expense exp = new Expense(Calendar.getInstance(), val, txtDesc.getText().toString());
-                	mCategory.addExpense(exp);
-                } else if(mRequest == RequestCodes.EDIT) {
-                	eEdit.setDescription(txtDesc.getText().toString());
-                	eEdit.setValue(val);
-                	mCategory.setExpense(eEdit);
-                }
-                
-                EditExpenseActivity parent = (EditExpenseActivity) getActivity();
-                //parent.finishActivity(mRequest.ordinal());
-                Intent returnIntent = new Intent();
-                parent.setResult(android.app.Activity.RESULT_OK, returnIntent);
-                parent.finish();
-            }
-        });
+				double val = Double.parseDouble(txtVal.getText().toString());
 
-        return rootView;
-    }
+				if (val < 0) {
+					Toast.makeText(rootView.getContext(),
+							"Invalid Expense Amount", Toast.LENGTH_SHORT);
+					return;
+				}
+
+				if (mRequest == RequestCodes.NEW) {
+					Expense exp = new Expense(Calendar.getInstance(), val,
+							txtDesc.getText().toString());
+					mCategory.addExpense(exp);
+				} else if (mRequest == RequestCodes.EDIT) {
+					eEdit.setDescription(txtDesc.getText().toString());
+					eEdit.setValue(val);
+					mCategory.setExpense(eEdit);
+				}
+
+				EditExpenseActivity parent = (EditExpenseActivity) getActivity();
+				// parent.finishActivity(mRequest.ordinal());
+				Intent returnIntent = new Intent();
+				parent.setResult(android.app.Activity.RESULT_OK, returnIntent);
+				parent.finish();
+			}
+		});
+
+		Button btnDelete = (Button) rootView.findViewById(R.id.btnDelete);
+
+		btnDelete.setOnClickListener(new View.OnClickListener() {
+			@Override
+			public void onClick(View v) {
+				mCategory.removeExpense(eEdit);
+				EditExpenseActivity parent = (EditExpenseActivity) getActivity();
+				Intent returnIntent = new Intent();
+				parent.setResult(android.app.Activity.RESULT_OK, returnIntent);
+				parent.finish();
+			}
+		});
+
+		if (mRequest != RequestCodes.EDIT) {
+			btnDelete.setVisibility(View.GONE);
+		}
+
+		return rootView;
+	}
 }
-

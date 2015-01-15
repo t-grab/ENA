@@ -144,6 +144,7 @@ public class ExpenseFragment extends Fragment {
 				Intent i = new Intent(view.getContext(), EditExpenseActivity.class);
 	            i.putExtra("ARG_REQUEST", RequestCodes.EDIT);
 	            i.putExtra("ARG_CATEGORY", cCat.getTitle());
+	            Log.i("ENA", "exSelectID: " + String.valueOf(((Expense)mListView.getItemAtPosition(position)).getId()));
 	            i.putExtra("ARG_ID", ((Expense)mListView.getItemAtPosition(position)).getId());
 	            startActivityForResult(i, RequestCodes.EDIT.ordinal());
 				return true; // accept click

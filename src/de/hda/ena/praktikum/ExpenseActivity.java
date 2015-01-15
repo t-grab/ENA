@@ -67,6 +67,13 @@ public class ExpenseActivity extends Activity implements
 		mNavigationDrawerFragment.setUp(R.id.navigation_drawer,
 				(DrawerLayout) findViewById(R.id.drawer_layout));
 	}
+	
+	@Override
+	public boolean onPrepareOptionsMenu(Menu menu) {
+	    MenuItem item= menu.findItem(R.id.action_settings);
+	    item.setVisible(false);
+	    return super.onPrepareOptionsMenu(menu);
+	}
 
 	@Override
 	public void onNavigationDrawerItemSelected(int position) {
@@ -169,6 +176,8 @@ public class ExpenseActivity extends Activity implements
 		// as you specify a parent activity in AndroidManifest.xml.
 		int id = item.getItemId();
 		if (id == R.id.action_settings) {
+			Intent i = new Intent(this, SettingsActivity.class);
+			startActivity(i);
 			return true;
 		}
 		return super.onOptionsItemSelected(item);

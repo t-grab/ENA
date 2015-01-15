@@ -122,7 +122,7 @@ public class FileHandler {
 			
 			Calendar date = Calendar.getInstance();
 			date.setTimeInMillis(json.getLong("date"));
-			Expense exp = new Expense(date, value, description);
+			Expense exp = new Expense(date, value, description, i);
 			list.add(exp);
 		}
 		

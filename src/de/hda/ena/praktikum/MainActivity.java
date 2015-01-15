@@ -62,8 +62,7 @@ public class MainActivity extends Activity implements
 		
 		//load data
 		if(DataStore.cData == null) {
-			FileHandler fh = new FileHandler(Environment
-					.getExternalStorageDirectory().getPath() + "/expenses.json",
+			FileHandler fh = new FileHandler(DataStore.sPath,
 					getApplicationContext());
 
 			DataStore.cData = fh.read();
@@ -131,7 +130,8 @@ public class MainActivity extends Activity implements
 		
 		if (id == R.id.action_settings) {
 			Log.i("ENA","Settings clicked");
-			//TODO ADD INTENT
+			Intent i = new Intent(this, SettingsActivity.class);
+			startActivity(i);
 			return true;
 		}
 		return super.onOptionsItemSelected(item);

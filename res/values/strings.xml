@@ -37,5 +37,7 @@
     <string name="enter_expense_button">Eintragen</string>
     <string name="title_activity_edit_expense">EditExpenseActivity</string>
     <string name="hello_world">Hello world!</string>
+    <string name="remove_expense_button">Delete</string>
+    <string name="title_settings">Settings</string>
 
 </resources>

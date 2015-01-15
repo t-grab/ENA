@@ -2,6 +2,7 @@ package de.hda.ena.praktikum;
 
 import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.Collections;
 import java.util.List;
 
 import android.os.Parcel;
@@ -61,6 +62,7 @@ public class Category implements Parcelable {
 	}
 
 	public void setExpenses(ArrayList<Expense> exp) {
+		//Collections.reverse(exp);
 		this.expenses = exp;
 		this.maxId = exp.get(exp.size()-1).getId() + 1;
 	}
@@ -81,7 +83,7 @@ public class Category implements Parcelable {
 		}
 		case WOCHE: {
 			start.set(Calendar.DAY_OF_WEEK,
-					start.getActualMinimum(Calendar.DAY_OF_WEEK));
+			start.getActualMinimum(Calendar.DAY_OF_WEEK));
 			start.set(Calendar.HOUR_OF_DAY, 0);
 			break;
 		}
@@ -117,10 +119,14 @@ public class Category implements Parcelable {
 		}
 	}
 	
+	public void removeExpense(Expense ex) {
+		this.expenses.remove(ex);
+	}
+	
 	public void addExpense(Expense exp) {
 		if (exp.getId() != -1)
 			return;
-		this.expenses.add(new Expense(exp.getDate(), exp.getValue(), exp.getDescription(), this.maxId));
+		this.expenses.add(0, new Expense(exp.getDate(), exp.getValue(), exp.getDescription(), this.maxId));
 		this.maxId++;
 	}
 	
